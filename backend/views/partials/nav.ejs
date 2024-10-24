@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid d-flex justify-content-between">
+    <div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link <%- url === '/admin/add' ? 'active' : '' %>" href="/admin/add">Dodaj</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%- url === '/admin/edit' ? 'active' : '' %>" href="/admin/edit">Edytuj</a>
+          </li>
+          <% if (!user) { %>
+            <li class="nav-item">
+              <a class="nav-link <%- url.includes('/zarejestruj') ? 'active' : '' %>" href="/register">Rejestracja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link <%- url.includes('/login') ? 'active' : '' %>" href="/login">Logowanie</a>
+            </li>
+          <% } else { %>
+            <li class="nav-item">
+              <a class="nav-link <%- url.includes('/admin/profil') ? 'active' : '' %>" href="/admin/profil">Profil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Wyloguj</a>
+            </li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+    <% if (user) { %>
+      <div>
+        <span class="navbar-text">Zalogowano jako: <%-user.email%></span>
+      </div>
+    <% } %>
+  </div>
+</nav>

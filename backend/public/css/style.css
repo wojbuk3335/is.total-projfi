@@ -1,0 +1,264 @@
+body{
+    background-color: #3F4E55;
+}
+
+.main_section  {
+    border: 1px solid black;
+    margin: 10px;
+    padding: 10px;
+    background-color: lightgray;
+}
+
+.small_section {
+    border: 1px solid black;
+    margin: 5px;
+    padding: 5px;
+    background-color: white;
+}
+
+.login-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* This will make the container take the full height of the viewport */
+}
+
+.cont{
+    width: 100%;
+    max-width: 400px;
+    padding: 15px;
+    margin: 15px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: lightgray;
+    text-align: center;
+}
+
+
+.section {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: lightgray;
+    position: relative;
+}
+.caption {
+    font-weight: bold;
+}
+.delete-button {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.bottom-button {
+    margin-top: 10px;
+    display: block;
+}
+
+#SendButton{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+}
+
+#createNewSection{
+    margin-top: 10px;
+}
+
+.form-inline{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.form-inline2{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.empty-input::placeholder {
+    color: red;
+  }
+
+  .label {
+    white-space: nowrap;
+    margin-right: 10px;
+}
+
+.lesson{
+    position: relative;
+    background-color: darkgray;
+    margin: 10px;
+    padding: 10px;
+}
+
+
+
+.grey-background {
+    background-color: rgb(231, 231, 231);
+    padding: 10px;
+}
+
+.header_edit_section{
+    align-items: center;
+    color: white;
+    text-align: center;
+    margin: 30px;
+}
+
+.section-container {
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px; /* Add margin to the bottom of each section container */
+}
+
+.title, .author {
+    margin-right: 10px;
+}
+
+.buttons {
+    display: flex;
+}
+
+.btn {
+    margin-left: 10px;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 5px; /* Reduce the right margin */
+}
+
+.author {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 5px; /* Reduce the left margin */
+}
+
+.text-right {
+    text-align: right;
+}
+
+.edit_section{
+    margin-top: 10px;
+    color: white;
+    text-align: center;
+    margin: 10px;
+    font-size: 25px;;
+}
+
+.task{
+    margin-top: 10px;
+    padding: 10px;
+    padding-top: 25px;
+    position: relative;
+}
+
+.introduction{
+    margin-top: 10px;
+    position: relative;
+    background-color: rgb(85, 85, 85);
+    padding-bottom: 23px;
+}
+
+.delete_introduction{
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.no-wrap {
+    white-space: nowrap;
+}
+
+.introduction{
+    margin-top: 10px;
+    position: relative;
+    background-color: rgb(85, 85, 85);
+    padding-bottom: 23px;
+}
+  .edit_section_caption{
+    margin-top: 10px;
+    color: white;
+    text-align: center;
+    margin: 10px;
+    font-size: 25px;;
+  }
+
+  .removeLesson{
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  .removeTask{
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  .spinner {
+    border: 2px solid #f3f3f3; /* Light grey */
+    border-top: 2px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+        .center-container {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+        }
+
+
+    @media (max-width: 768px) {
+
+        .form-inline2{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        .section {
+            text-align: center;
+        }
+
+        .form-inline {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        .questionCorrectSelect{
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    }

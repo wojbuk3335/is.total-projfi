@@ -1,0 +1,2752 @@
+<h1 class="edit_section">Edytuj dział <%= section.title_of_section %></h1>
+<% var nr_secion=1 %>
+
+<div class="section" section_number="<%= nr_secion %>">
+    <div class="form-inline2" style="text-align: left;">
+        <label for="input-status-<%= section.status_of_section %>" class="label">Status działu: </label>
+        <select class="section_<%= nr_secion %> form-control mr-2 StatusSectionSelect" id="input-status-<%= section.status_of_section %>" value="<%= section.status_of_section %>" placeholder="Wpisz status działu" style="width: 140px;">
+            <option value="true" <%= section.status_of_section === true ? 'selected' : '' %>>Aktywny</option>
+            <option value="false" <%= section.status_of_section === false ? 'selected' : '' %>>Nieaktywny</option>
+        </select>
+    </div>
+    <div class="form-inline">
+        <label for="input-<%= section.title_of_section %>" class="label">Tytuł działu: </label>
+        <input type="text" class="section_<%= nr_secion %> TitleSectionInput form-control mr-2" id="input-<%= section.title_of_section %>" value="<%= section.title_of_section %>" placeholder="Wpisz tytuł działu">
+    </div>
+    <div class="form-inline">
+        <label for="input-autor-<%= nr_secion %>" class="label">Autor: </label>
+        <input type="text" class="section_<%= nr_secion %> form-control mr-2 AutorInput" id="input-autor-<%= section.author_of_section %>" value="<%= section.author_of_section %>" placeholder="Wpisz autora">
+    </div>
+    <% section.lessons.forEach((lesson, index) => { %>
+        <div class="section_<%= nr_secion %> lesson" section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>">
+            <p style="font-weight: bold;" class="lesson_numbers lesson-text" section_number="<%= nr_secion %>"><b>Lekcja <%= index + 1 %></b></p>
+            <div class="form-inline2" style="text-align: left;">
+                <label for="input-status-<%= lesson.status_of_lesson %>" class="label">Status lekcji: </label>
+                <select class="section_<%= nr_secion %> lesson_<%= index + 1 %> form-control mr-2 StatusLessonSelect" id="input-status-<%= lesson.status_of_lesson %>" value="<%= lesson.status_of_lesson %>" placeholder="Wpisz status lekcji" style="width: 140px;">
+                    <option value="true" <%= lesson.status_of_lesson === true ? 'selected' : '' %>>Aktywna</option>
+                    <option value="false" <%= lesson.status_of_lesson === false ? 'selected' : '' %>>Nieaktywna</option>
+                </select>
+            </div>
+            <div section_number="<%= nr_secion %>" class="form-inline">
+                <label section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" for="input-<%= lesson.title_of_lesson %>" class="label">Tytuł lekcji: </label>
+                <input section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" type="text" class="section_<%= nr_secion %> lesson_<%= index + 1 %> TitleLessonInput form-control mr-2" id="input-<%= lesson.title_of_lesson %>" value="<%= lesson.title_of_lesson %>" placeholder="Wpisz tytuł lekcji">
+            </div>
+
+            <% lesson.tasks.forEach((task, taskIndex) => { %>
+                <div section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" class="section_<%= nr_secion %> lesson_<%= index + 1 %> task" style="background-color: rgb(128, 128, 128); margin: 10px;">
+                    <p class="task_caption"><strong>Zadanie <%= String.fromCharCode(65 + taskIndex) %></strong></p>
+                    <div section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" class="form-inline">
+                        <label section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" for="input-task-<%= task.title_of_task %>" class="label">Treść zadania: </label>
+                        <input section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" type="text" class="section_<%= nr_secion %> lesson_<%= index + 1 %> task_<%= taskIndex + 1 %> form-control mr-2 TaskInput" id="input-task-<%= task.title_of_task %>" value="<%= task.title_of_task %>" placeholder="Wpisz treść zadania np. co widzisz? co usłyszałeś? co opiszesz? itp">
+                    </div>
+                    <% task.introductions.forEach((introduction, introductionIndex) => { %>
+                        <% if (introduction && introduction.title_of_introduction) { %>
+                            <div section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" introduction_number="<%= introductionIndex + 1 %>" style="margin: 10px; font-weight: bold; padding: 15px 20px 10px 10px;" class="section_<%= nr_secion %> lesson_<%= index + 1 %> task_<%= taskIndex + 1 %> introduction help" section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" introduction_number="<%= introductionIndex + 1 %>">
+                                <label section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" introduction_number="<%= introductionIndex + 1 %>" for="input-introduction-<%= introduction.title_of_introduction %>" class="label">Tytuł: </label>
+                                <input style="margin: 10px;" section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" introduction_number="<%= introductionIndex + 1 %>" type="text" class="section_<%= nr_secion %> lesson_<%= index + 1 %> task_<%= taskIndex + 1 %> introduction_<%= introductionIndex + 1 %> form-control mr-2 IntroductionInput Introd" id="input-introduction-<%= introduction.title_of_introduction %>" value="<%= introduction.title_of_introduction %>" placeholder="Wpisz np. wprowadzenie, zaznacz wszystkie prawiłowe odpowiedzi itp.">
+                                
+                                <label section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" introduction_number="<%= introductionIndex + 1 %>" for="input-introduction-<%= introduction.description %>" class="label">Opis: </label>
+                                <textarea style="margin: 10px;" section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" introduction_number="<%= introductionIndex + 1 %>" class="section_<%= nr_secion %> lesson_<%= index + 1 %> task_<%= taskIndex + 1 %> introduction_<%= introductionIndex + 1 %> form-control mr-2 DescriptionInput Introd" id="input-introduction-<%= introduction.description %>" placeholder="Opis do filmu"><%= introduction.description %></textarea>
+                                
+                                <label section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" introduction_number="<%= introductionIndex + 1 %>" for="input-introduction-<%= introduction.path_file %>" class="label">Aktualny film: </label>
+                                <input style="margin: 10px;" type="hidden" id="hidden-introduction-<%= introduction.path_file %>" value="<%= introduction.path_file %>">
+                                <input style="margin: 10px;" type="text" readonly class="form-control currentFilmInIntroductionHelp" value="<%= introduction.path_file %>" placeholder="Wpisz wprowadzenie">
+                                
+                                <label section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" introduction_number="<%= introductionIndex + 1 %>" for="input-introduction-<%= introduction.path_file %>" class="label">Wstaw nowy film: </label>
+                                <input style="margin: 10px;" section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" introduction_number="<%= introductionIndex + 1 %>" type="file" class="section_<%= nr_secion %> lesson_<%= index + 1 %> task_<%= taskIndex + 1 %> introduction_<%= introductionIndex + 1 %> form-control mr-2 IntroductionInputFile Introd" id="input-introduction-<%= introduction.path_file %>">
+                                
+                                <% introduction.questions.forEach((question, questionIndex) => { %>
+                                    <div style="" class="section_<%= nr_secion %> lesson_<%= index + 1 %> task_<%= taskIndex + 1 %> introduction_<%= introductionIndex + 1 %> question_<%= questionIndex + 1 %> question" section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" introduction_number="<%= introductionIndex + 1 %>" question_number="<%= questionIndex + 1 %>">
+                                        <div style="background-color: rgb(32, 32, 32); margin: 10px; padding: 45px 10px; color: white; position: relative;" class="form-inline">
+                                            <label section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" introduction_number="<%= introductionIndex + 1 %>" question_number="<%= questionIndex + 1 %>" for="input-question-<%= question.question %>" class="label question-number">Pytanie: <%= questionIndex + 1 %> </label>
+                                            <input style="margin-top: 10px;margin-bottom: 10px;"section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" introduction_number="<%= introductionIndex + 1 %>" question_number="<%= questionIndex + 1 %>" type="text" class="section_<%= nr_secion %> lesson_<%= index + 1 %> task_<%= taskIndex + 1 %> introduction_<%= introductionIndex + 1 %> question_<%= questionIndex + 1 %> form-control mr-2 questionInput Introd" id="input-question-<%= question.question %>" value="<%= question.question %>" placeholder="Wpisz pytanie">
+                                            <label section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" introduction_number="<%= introductionIndex + 1 %>" question_number="<%= questionIndex + 1 %>" for="input-correct-<%= question.correct %>" class="label"></label>
+                                            <select style="width: 200px; margin-left: 10px;" section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" introduction_number="<%= introductionIndex + 1 %>" question_number="<%= questionIndex + 1 %>" class="section_<%= nr_secion %> lesson_<%= index + 1 %> task_<%= taskIndex + 1 %> introduction_<%= introductionIndex + 1 %> question_<%= questionIndex + 1 %> form-control mr-2 questionCorrectSelect" id="input-correct-<%= question.correct %>" value="<%= question.correct %>" placeholder="Wpisz poprawną odpowiedź">
+                                                <option value="true" <%= question.correct === 'Poprawne' ? 'selected' : '' %>>Poprawne</option>
+                                                <option value="false" <%= question.correct === 'Niepoprawne' ? 'selected' : '' %>>Niepoprawne</option>
+                                            </select>
+                                            <label section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" introduction_number="<%= introductionIndex + 1 %>" question_number="<%= questionIndex + 1 %>" for="input-active-<%= question.active %>" class="label"></label>
+                                            <select style="width: 200px; margin-left: 10px;" section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" introduction_number="<%= introductionIndex + 1 %>" question_number="<%= questionIndex + 1 %>" class="section_<%= nr_secion %> lesson_<%= index + 1 %> task_<%= taskIndex + 1 %> introduction_<%= introductionIndex + 1 %> question_<%= questionIndex + 1 %> form-control mr-2 questionActiveSelect" id="input-active-<%= question.active %>" value="<%= question.active %>" placeholder="Wpisz aktywne">
+                                                <option value="true" <%= question.active === 'Aktywne' ? 'selected' : '' %>>Aktywne</option>
+                                                <option value="false" <%= question.active === 'Nieaktywne' ? 'selected' : '' %>>Nieaktywne</option>
+                                            </select>
+                                            <% if (questionIndex > 0) { %>
+                                                <button class="btn btn-danger btn-sm delete_question_button" style="position: absolute; top: 5px; right: 5px;">Usuń pytanie</button>
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                <% }) %>
+                                <button class="btn btn-secondary bottom-button createQuestionButton" style="margin-top: 5px; margin-left: 5px;">Dodaj pytanie</button>
+                                <input type="checkbox" class="checkbox" style="margin-top:10px;width:  20px; height: 20px; margin-left: 10px; margin-bottom: 5px; margin-right: 5px; background-color: black;"
+                                    <% if (task.introductions[introductionIndex + 1] && (task.introductions[introductionIndex + 1].title_of_description || !task.introductions[introductionIndex + 1].title_of_introduction)) { %>
+                                        checked
+                                    <% } %>
+                                > <label style="color: white; margin-left: 5px; margin-top: 15px;">Dodaj omówienie</label>
+                                <% if (task.introductions[introductionIndex + 1] && !task.introductions[introductionIndex + 1].title_of_introduction) { %>
+                                <% } %>            
+                                <!--Add button remove-->
+                                <% if (introductionIndex > 0) { %>
+                                    <button class="delete-button btn btn-danger btn-sm" style="position: absolute; top: 5px; right: 5px;">Usuń wprowadzenie</button> 
+                                <% } %>      
+                            </div>
+            
+                        <% } %>
+                        <% if (introduction && !introduction.title_of_introduction) { %>
+                            <div style="padding: 10px;" section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" introduction_number="<%= introductionIndex%>" class="section_1 lesson_1 task_1 introduction description edit">
+                                <label section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" introduction_number="<%= introductionIndex%>" for="input-introduction-<%= introduction.description %>" class="label"><b>Opis:</b> </label>
+                                <textarea style="margin: 10px; width: 98%;" section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" introduction_number="<%= introductionIndex %>" class="section_<%= nr_secion %> lesson_<%= index + 1 %> task_<%= taskIndex + 1 %> introduction_<%= introductionIndex%> form-control mr-2 DescriptionInput" id="input-introduction-<%= introduction.description %>" placeholder="Opis do filmu"><%= introduction.description %></textarea>
+                                <label section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" introduction_number="<%= introductionIndex %>" for="hidden-introduction-<%= introduction.path_file %>" class="label"><b>Aktualny film:</b> </label>
+                                <input style="margin: 10px;" section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" introduction_number="<%= introductionIndex %>" type="text" class="currentFilmIntroductionDescription section_<%= nr_secion %> lesson_<%= index + 1 %> task_<%= taskIndex + 1 %> introduction_<%= introductionIndex %> form-control mr-2" id="hidden-introduction-<%= introduction.path_file %>" value="<%= introduction.path_file %>">
+                                <label section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" introduction_number="<%= introductionIndex %>" for="input-introduction-<%= introduction.path_file %>" class="label"><b>Wstaw nowy film:</b> </label>
+                                <input style="margin: 10px;" section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" introduction_number="<%= introductionIndex%>" type="file" class="section_<%= nr_secion %> lesson_<%= index + 1 %> task_<%= taskIndex + 1 %> introduction_<%= introductionIndex %> form-control mr-2 IntroductionInputFile" id="input-introduction-<%= introduction.path_file %>">
+                            </div>
+                        <% } %>
+                    <% }) %>
+                    <button section_number="<%= nr_secion %>" lesson_number="<%= index + 1 %>" task_number="<%= taskIndex + 1 %>" class="btn btn-secondary bottom-button createIntroductionButton">Dodaj wprowadzenie</button>
+                    <% if (taskIndex > 0) { %>
+                        <button section_number="<%= nr_secion %>" class="btn btn-danger btn-sm removeTask section_<%= nr_secion %> lesson_<%= index + 1 %>">Usuń zadanie</button>
+                    <% } %>
+                </div>
+            <% }) %>
+
+            <% if (index > 0) { %>
+                <button section_number="<%= nr_secion %>" class="btn btn-danger btn-sm removeLesson">Usuń lekcję</button>
+            <% } %>
+            <button section_number="<%= nr_secion %>" class="btn btn-secondary bottom-button createTaskButton">Utwórz zadanie</button>
+        </div>
+    <% }) %>
+    <button section_number="<%= nr_secion %>" class="btn btn-secondary bottom-button createLessonButton">Utwórz lekcję</button>
+</div>
+
+<div class="form-inline">
+    <button class="btn btn-success" id="SendButton" style="display: block;">Zapisz</button>
+    <span id="spinner" class="spinner" style="display: none;"></span>
+</div>
+
+<script>
+    
+
+//get the delete-button and add event listener to it
+var deleteButton = document.querySelectorAll('.delete-button');
+deleteButton.forEach(function(button) {
+    button.addEventListener('click', function() {
+        //get the parent element and remove it
+        var parentElement = button.parentElement;
+        parentElement.remove();
+
+        // Remove the second element with class 'introduction description'
+        var secondIntroductionDescription = document.querySelectorAll('.introduction.description')[1];
+        if (secondIntroductionDescription) {
+            secondIntroductionDescription.remove();
+        }
+
+        // Renumerate the introduction_number attribute and classes
+        var introductions = document.querySelectorAll('.introduction');
+        introductions.forEach(function(introduction, index) {
+            var newNumber = index + 1;
+            introduction.setAttribute('introduction_number', newNumber);
+            
+            // Update classes with prefix introduction_
+            var oldClass = introduction.className.match(/introduction_\d+/);
+            if (oldClass) {
+                introduction.classList.remove(oldClass[0]);
+                introduction.classList.add('introduction_' + newNumber);
+            }
+
+            var elementsToUpdate = introduction.querySelectorAll('[introduction_number]');
+            elementsToUpdate.forEach(function(element) {
+                element.setAttribute('introduction_number', newNumber);
+                
+                // Update classes with prefix introduction_
+                var oldClass = element.className.match(/introduction_\d+/);
+                if (oldClass) {
+                    element.classList.remove(oldClass[0]);
+                    element.classList.add('introduction_' + newNumber);
+                }
+            });
+        });
+    });
+});
+
+// Get element createIntroductionButton
+var createIntroductionButton = document.querySelectorAll('.createIntroductionButton');
+
+// Add event listener to the createIntroductionButton
+createIntroductionButton.forEach(function(button) {
+    button.addEventListener('click', function() {
+
+        // Create a new introduction div
+        var introduction_div = document.createElement('div');
+        // Get the closest section number
+        var divCounter = button.closest('.section').getAttribute('section_number');
+        // Get the closest lesson number
+        var lessonCounter = button.closest('.lesson').getAttribute('lesson_number');
+        // Get the closest task number
+        var taskCounterInt = button.closest('.task').getAttribute('task_number');
+        
+        //count all introductions div inside the current task with the class introduction but without the class description
+        var introduction_counter = button.closest('.task').querySelectorAll('.introduction:not(.description)').length;
+        //increment the introduction counter
+        introduction_counter++;
+
+        introduction_div.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction help`;
+        introduction_div.style.backgroundColor = "#505050"; // This is a silver color
+        introduction_div.style.margin = '10px';
+        introduction_div.style.fontWeight = 'bold';
+        introduction_div.style.padding = '10px';
+        introduction_div.style.paddingRight = '20px';
+
+        // Add attribute section number
+        introduction_div.setAttribute('section_number', divCounter);
+        // Add attribute lesson number
+        introduction_div.setAttribute('lesson_number', lessonCounter);
+        // Add attribute task number
+        introduction_div.setAttribute('task_number', taskCounterInt);
+        // Add attribute introduction number
+        introduction_div.setAttribute('introduction_number', introduction_counter);
+        
+        // Padding top
+        introduction_div.style.paddingTop = '15px';
+        // Create a Bootstrap form group with inline form
+        var IntroductionformInline = document.createElement('div');
+
+        var createdDiv = document.createElement('div');
+        createdDiv.className = 'createdDiv';
+        // Add label input to the IntroductionformInline
+        var label = document.createElement('label');
+        label.textContent = "Tytuł: ";
+        label.className = 'introduction-text';
+
+        // Create the label
+        var titleLabel = document.createElement('label');
+        titleLabel.textContent = 'Tytuł';
+        titleLabel.className = 'label xxx';
+
+        // Create the input
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${introduction_counter} form-control mr-2 IntroductionInput Introd`; // margin right for spacing
+        input.placeholder = 'Wpisz np. wprowadzenie, zaznacz wszystkie prawiłowe odpowiedzi,omówienie itp';
+        // Add margin
+        input.style.margin = '10px';
+
+        // Add attribute section number
+        input.setAttribute('section_number', divCounter);
+        // Add attribute lesson number
+        input.setAttribute('lesson_number', lessonCounter);
+        // Add attribute task number
+        input.setAttribute('task_number', taskCounterInt);
+        // Add attribute introduction number
+        input.setAttribute('introduction_number', introduction_counter);
+
+
+        // Add delete button except for the first time
+        if (introduction_counter > 1) {
+        var deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Usuń wprowadzenie';
+        deleteButton.style.marginLeft = '5px';
+        deleteButton.style.marginTop = '5px';
+        // Add a class to the delete button
+        deleteButton.className = 'delete-button btn btn-danger btn-sm';
+
+        deleteButton.addEventListener('click', function() {
+            // Get the parent of the task div (should be the lesson_div)
+            var parentLesson = introduction_div.parentNode;
+
+            // Capture the text content before removing the element
+            var introductionText = introduction_div.querySelector('.introduction-text').textContent;
+
+            // Remove the entire task div
+            parentLesson.removeChild(introduction_div);
+
+            // Count all introductions in the current task
+            let remainingIntroductions = parentLesson.querySelectorAll('.introduction').length;
+            // Renumber the introductions within the parent task
+            for (var i = 0; i < remainingIntroductions; i++) {
+                let introduction = parentLesson.querySelectorAll('.introduction')[i];
+                // Update the attribute introduction number in loop starting from 1
+                introduction.setAttribute('introduction_number', i + 1);
+
+                // Do the same with the class name of the elements nested inside the introduction div
+                introduction.querySelectorAll('[class*="introduction_"]').forEach(function(childElement) {
+                    childElement.className = childElement.className.replace(/introduction_\d+/, 'introduction_' + (i + 1));
+                    childElement.setAttribute('introduction_number', i + 1);
+                });
+            }
+        });
+        introduction_div.appendChild(deleteButton);
+    }
+        
+        createdDiv.appendChild(label);
+        createdDiv.appendChild(input);
+        // Display block 
+        createdDiv.style.display = 'block';
+
+        // Do the label2 and instead of input2 create a textarea
+        var createdDiv2 = document.createElement('div');
+        createdDiv2.className = 'createdDiv2';
+
+        var label2 = document.createElement('label');
+        label2.textContent = 'Opis: ';
+        label2.className = 'label';
+
+        // Create the input
+        var textarea = document.createElement('textarea');
+        textarea.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${introduction_counter} form-control mr-2 DescriptionInput Introd`; // margin right for spacing
+        textarea.placeholder = 'Opis do filmu';
+        textarea.style.margin = '10px';
+
+        // Add attribute section number
+        textarea.setAttribute('section_number', divCounter);
+        // Add attribute lesson number
+        textarea.setAttribute('lesson_number', lessonCounter);
+        // Add attribute task number
+        textarea.setAttribute('task_number', taskCounterInt);
+        // Add attribute introduction number
+        textarea.setAttribute('introduction_number', introduction_counter);
+
+        createdDiv2.appendChild(label2);
+        createdDiv2.appendChild(textarea);
+        createdDiv2.style.display = 'block';
+
+        var createdDiv3 = document.createElement('div');
+        createdDiv3.className = 'createdDiv';
+
+        // Add label input to the IntroductionformInline
+        var label3 = document.createElement('label');
+        label3.textContent = "Wstaw nowy film:"
+        label3.className = 'label';
+        // Create the input
+        var input3 = document.createElement('input');
+        input3.type = 'file';
+        // Add id
+        input3.id = 'file';
+        input3.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${introduction_counter} form-control mr-2 IntroductionInputFile Introd`; // margin right for spacing
+        input3.accept = 'video/*, image/*'; // accept both video and image files
+        input3.placeholder = 'Upload a film or image here';
+        // Add margin
+        input3.style.margin = '10px';
+
+        // Add attribute section number
+        input3.setAttribute('section_number', divCounter);
+        // Add attribute lesson number
+        input3.setAttribute('lesson_number', lessonCounter);
+        // Add attribute task number
+        input3.setAttribute('task_number', taskCounterInt);
+        // Add attribute introduction number
+        input3.setAttribute('introduction_number', introduction_counter);
+
+        createdDiv3.appendChild(label3);
+        createdDiv3.appendChild(input3);
+        // Display block 
+        createdDiv3.style.display = 'block';
+
+        // Append label and input to the form inline
+        IntroductionformInline.appendChild(label);
+        IntroductionformInline.appendChild(input);
+        IntroductionformInline.appendChild(label2);
+        IntroductionformInline.appendChild(textarea);
+        IntroductionformInline.appendChild(label3);
+        IntroductionformInline.appendChild(input3);
+
+        // Create a button Add Question  
+        var addQuestionButton = document.createElement('button');
+        addQuestionButton.className = 'btn btn-secondary bottom-button createQuestionButton';
+        addQuestionButton.textContent = 'Dodaj pytanie';
+        addQuestionButton.style.marginTop = '5px';
+        addQuestionButton.style.marginLeft = '5px';
+        // Append the form inline to the introduction div
+        introduction_div.appendChild(IntroductionformInline);
+
+        // Append the bottom button to the new div
+        introduction_div.appendChild(addQuestionButton);
+
+
+        var questionsCounter = 0;
+        function createQuestions(){
+            questionsCounter++;
+            var questions_div = document.createElement('div');
+            // Get the closest section number
+            var divCounter = button.closest('.section').getAttribute('section_number');
+            // Get the closest lesson number
+            var lessonCounter = button.closest('.lesson').getAttribute('lesson_number');
+            // Get the closest task number
+            var taskCounterInt = button.closest('.task').getAttribute('task_number');
+            //count all introductions in the current task with the class introduction but without the class description
+            var Intoduction_couter = button.closest('.task').querySelectorAll('.introduction:not(.description)').length+1;
+            questions_div.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} question_${questionsCounter} question`;
+            questions_div.style.backgroundColor = "#202020"; // This is an even darker shade of gray
+            questions_div.style.margin = '10px';
+            questions_div.style.paddingTop = '30px';
+            questions_div.style.paddingBottom = '30px';
+            questions_div.style.paddingLeft = '10px';
+            questions_div.style.paddingRight = '10px';
+            questions_div.style.color = 'white';
+            // After creating the questions_div, add these lines
+            questions_div.style.position = 'relative'; // Make the div relative
+
+            //add attributes to the questions_div
+            questions_div.setAttribute('section_number', divCounter);
+            questions_div.setAttribute('lesson_number', lessonCounter);
+            questions_div.setAttribute('task_number', taskCounterInt);
+            questions_div.setAttribute('introduction_number', Intoduction_couter);
+            questions_div.setAttribute('question_number', questionsCounter);
+
+            if(questionsCounter > 1){
+                var deleteQuestionButton = document.createElement('button');
+                deleteQuestionButton.textContent = 'Usuń pytanie';
+                deleteQuestionButton.style.position = 'absolute';
+                deleteQuestionButton.style.top = '5px';
+                deleteQuestionButton.style.right = '5px';
+                deleteQuestionButton.className = 'btn btn-danger btn-sm delete_question_button';
+                deleteQuestionButton.addEventListener('click', function() {
+                    var parentIntroduction = questions_div.parentNode;
+                    parentIntroduction.removeChild(questions_div);
+                });
+                questions_div.appendChild(deleteQuestionButton);
+            }
+
+
+            //create a Bootstrap form group with inline form
+            var QuestionsformInline = document.createElement('div');
+                         //create a label input to the QuestionsformInline
+                         var label = document.createElement('label');
+                         label.textContent = `Pytanie: ${questionsCounter}`
+                         label.className = 'label form-control-label mr-2 question-number'; // Add margin to the right and the question-numbe
+
+                         QuestionsformInline.className = 'form-inline'; // Add Bootstrap's form-inline class
+
+                        //create the input
+                        var input = document.createElement('input');
+                        input.type = 'text';
+                        input.className = `form-control mr-2 section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} question_${questionsCounter} questionInput Introd`; // Add Bootstrap's form-control class and margin to the right
+                        
+                        //add attributes to the input
+                        input.setAttribute('section_number', divCounter);
+                        input.setAttribute('lesson_number', lessonCounter);
+                        input.setAttribute('task_number', taskCounterInt);
+                        input.setAttribute('introduction_number', Intoduction_couter);
+                        input.setAttribute('question_number', questionsCounter);
+                        
+                        //create a select
+                         var select = document.createElement('select');
+                         select.className = `form-control custom-select section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} question_${questionsCounter} questionCorrectSelect`; // Add Bootstrap's custom-select class
+                         select.style.width = '200px';
+                         select.style.marginLeft = '10px'; // Add margin to the left
+
+                         //add attributes to the select
+                            select.setAttribute('section_number', divCounter);
+                            select.setAttribute('lesson_number', lessonCounter);
+                            select.setAttribute('task_number', taskCounterInt);
+                            select.setAttribute('introduction_number', Intoduction_couter);
+                            select.setAttribute('question_number', questionsCounter);
+
+                         //create options
+                         var option1 = document.createElement('option');
+                         option1.value = 'true';
+                         option1.text = 'Poprawne';
+
+                         var option2 = document.createElement('option');
+                         option2.value = 'false';
+                         option2.text = 'Niepoprawne';
+
+                         //create a select
+                         var select2 = document.createElement('select');
+                         select2.className = `form-control custom-select section_${divCounter}  lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} question_${questionsCounter} questionActiveSelect`; // Add Bootstrap's custom-select class
+                         select2.style.width = '200px';
+                         select2.style.marginLeft = '10px'; // Add margin to the left
+
+                         //add attributes to the select
+                            select2.setAttribute('section_number', divCounter);
+                            select2.setAttribute('lesson_number', lessonCounter);
+                            select2.setAttribute('task_number', taskCounterInt);
+                            select2.setAttribute('introduction_number', Intoduction_couter);
+                            select2.setAttribute('question_number', questionsCounter);
+
+                         //create options
+                         var select2option1 = document.createElement('option');
+                         select2option1.value = 'Aktywne';
+                         select2option1.text = 'Aktywne';
+
+                         var select2option2 = document.createElement('option');
+                         select2option2.value = 'Nieaktywne';
+                         select2option2.text = 'Nieaktywne';
+
+                         //add options to the select
+                         select.appendChild(option1);
+                         select.appendChild(option2);
+                         select2.appendChild(select2option1);
+                         select2.appendChild(select2option2);
+
+                         //add label, input, and select to the QuestionsformInline
+                         QuestionsformInline.appendChild(label);
+                         QuestionsformInline.appendChild(input);
+                         QuestionsformInline.appendChild(select);
+                         QuestionsformInline.appendChild(select2);
+                         //append the form inline to the new div
+                         questions_div.appendChild(QuestionsformInline);
+                                introduction_div.insertBefore(questions_div, addQuestionButton);
+                            }
+
+                        createQuestions();
+                        //add addEventListener to the addQuestionButton and siple alert
+                        addQuestionButton.addEventListener('click', function() {
+                            createQuestions();
+                        });
+
+                                             //I want to create here a checkbox here
+                     // Create the checkbox
+                     var checkbox = document.createElement('input');
+                     checkbox.type = 'checkbox';
+                     checkbox.className = 'checkbox';
+                     checkbox.style.width = '20px';
+                     checkbox.style.height = '20px';
+                     checkbox.style.marginLeft = '10px';
+                     checkbox.style.marginBottom = '5px';
+                     checkbox.style.marginRight = '5px';
+                     //background color
+                     checkbox.style.backgroundColor = 'black';
+
+                     
+                     //add label to the checkbox
+                     var label = document.createElement('label');
+                     label.textContent = 'Dodaj omówienie';
+                     label.style.color = 'white';
+                     label.style.marginLeft = '5px';
+
+                     // Create a container div
+                     var container = document.createElement('div');
+
+                     // Apply flexbox to the container
+                     container.style.display = 'flex';
+                     container.style.alignItems = 'center'; // This will vertically center the checkbox and label
+                     //margin top
+                     container.style.marginTop = '10px';
+
+                     // Append the checkbox and label to the container
+                     container.appendChild(checkbox);
+                     container.appendChild(label);
+
+                    // Append the container to the introduction div
+                    introduction_div.appendChild(container);
+
+                    //add addEventListener to the checkbox and alert simple message checked ane when is unchecked
+                    checkbox.addEventListener('change', function() {
+                        if (this.checked) {
+                            alert('checked');
+                    // Get the current section number
+                    var divCounter = this.closest('.section').getAttribute('section_number');
+                    // Get the current lesson number
+                    var lessonCounter = this.closest('.lesson').getAttribute('lesson_number');
+                    // Get the current task number
+                    var taskCounterInt = this.closest('.task').getAttribute('task_number');
+                    // Create a new introduction div
+
+                    // Count all introductions in the current task
+                    let Intoduction_couter = this.closest('.task').querySelectorAll('.introduction').length;
+                    newIntroductionDiv = document.createElement('div');
+                    newIntroductionDiv.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction description add`;
+                    newIntroductionDiv.style.display = 'none'; // Initially hide the div
+                    newIntroductionDiv.style.padding = '10px';
+                    newIntroductionDiv.style.paddingRight = '20px';
+                            // Create a label for the input
+                    var label = document.createElement('label');
+                    label.textContent = 'Tytuł:';
+                    label.className = 'label';
+                    label.style.fontWeight = 'bold';
+                    label.style.display = 'none';
+                    // Create the input
+                    var input = document.createElement('input');
+                    input.type = 'text';
+                    input.style.display = 'none';
+                    input.placeholder = 'Wpisz np. wprowadzenie, zaznacz wszystkie prawiłowe odpowiedzi,omówienie itp';
+                    input.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} form-control mr-2 IntroductionInput Intr`;
+                    input.style.margin = '10px';
+                    input.disabled = true;
+                    
+        // Create a label for the textarea
+        var textareaLabel = document.createElement('label');
+        textareaLabel.textContent = 'Opis:';
+        textareaLabel.className = 'label';
+        textareaLabel.style.fontWeight = 'bold';
+
+        // Create the textarea
+        var textarea = document.createElement('textarea');
+        textarea.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} form-control mr-2 DescriptionInput Treat`;
+        textarea.placeholder = 'Opis do filmu';
+        textarea.style.margin = '10px';
+        textarea.style.marginRight = '10px';
+
+        // Create a label for the file input
+        var fileInputLabel = document.createElement('label');
+        fileInputLabel.textContent = 'Wstaw film:';
+        fileInputLabel.className = 'label';
+        fileInputLabel.style.fontWeight = 'bold';
+
+        // Create the file input
+        var fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.id = 'file';
+        fileInput.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} form-control mr-2 IntroductionInputFile Treat`;
+        fileInput.accept = 'video/*, image/*';
+        fileInput.placeholder = 'Upload a film or image here';
+        fileInput.style.margin = '10px';
+
+// Append the label and input to the newIntroductionDiv
+newIntroductionDiv.appendChild(label);
+        newIntroductionDiv.appendChild(input);
+
+        // Append the label and textarea to the newIntroductionDiv
+        newIntroductionDiv.appendChild(textareaLabel);
+        newIntroductionDiv.appendChild(textarea);
+
+        // Attach input event listener for description
+        textarea.addEventListener('input', function() {
+            if (this.value !== '') {
+                this.style.border = '';
+                this.classList.remove('empty-input'); // Remove class
+            }
+        });
+
+        // Attach input event listener for inputfile
+        fileInput.addEventListener('input', function() {
+            if (this.value !== '') {
+                this.style.border = '';
+                this.classList.remove('empty-input'); // Remove class
+            }
+        });
+
+        // Append the label and file input to the newIntroductionDiv
+        newIntroductionDiv.appendChild(fileInputLabel);
+        newIntroductionDiv.appendChild(fileInput);
+
+        // Create the button
+        var button = document.createElement('button');
+        button.textContent = 'Usuń pytanie';
+        button.className = 'btn btn-danger btn-sm';
+        button.style.position = 'absolute';
+        button.style.top = '5px';
+        button.style.right = '5px';
+
+        // Create the Bootstrap form group with inline form
+        var QuestionsformInline2 = document.createElement('div');
+        QuestionsformInline2.className = 'form-inline';
+
+        // Create the label
+        var questionLabel = document.createElement('label');
+        questionLabel.textContent = 'Pytanie: ';
+        questionLabel.className = 'label form-control-label mr-2 question-number';
+
+        // Create the input
+        var questionInput = document.createElement('input');
+        questionInput.type = 'text';
+        questionInput.className = `form-control mr-2 section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} question_${questionsCounter} questionInput`;
+        questionInput.disabled = true;
+
+        // Create the select
+        var select = document.createElement('select');
+        select.className = `form-control custom-select section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} question_${questionsCounter} questionCorrectSelect`;
+        select.style.width = '200px';
+        select.style.marginLeft = '10px';
+        select.disabled = true;
+
+        // Create the options
+        var option1 = document.createElement('option');
+        option1.value = 'Poprawne';
+        option1.text = 'Poprawne';
+
+        var option2 = document.createElement('option');
+        option2.value = 'Niepoprawne';
+        option2.text = 'Niepoprawne';
+
+        // Create the select2
+        var select2 = document.createElement('select');
+        select2.className = `form-control custom-select section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} question_${questionsCounter} questionActiveSelect`;
+        select2.style.width = '200px';
+        select2.style.marginLeft = '10px';
+        select2.disabled = true;
+
+        // Create the options for select2
+        var select2option1 = document.createElement('option');
+        select2option1.value = 'Aktywne';
+        select2option1.text = 'Aktywne';
+
+        var select2option2 = document.createElement('option');
+        select2option2.value = 'Nieaktywne';
+        select2option2.text = 'Nieaktywne';
+
+        // Add the options to the selects
+        select.appendChild(option1);
+        select.appendChild(option2);
+        select2.appendChild(select2option1);
+        select2.appendChild(select2option2);
+
+        // Add the label, input, and selects to the QuestionsformInline2
+        QuestionsformInline2.appendChild(questionLabel);
+        QuestionsformInline2.appendChild(questionInput);
+        QuestionsformInline2.appendChild(select);
+        QuestionsformInline2.appendChild(select2);
+
+        // Append the form inline to the new div
+        newIntroductionDiv.appendChild(QuestionsformInline2);
+
+        // Make the QuestionsformInline2 not active
+        QuestionsformInline2.style.display = 'none';
+
+        // Insert the newIntroductionDiv just after the parent of the checkbox
+        this.parentNode.parentNode.insertAdjacentElement('afterend', newIntroductionDiv);
+        newIntroductionDiv.style.display = 'block';
+
+        // Store the reference to the newIntroductionDiv in the checkbox element
+        this.newIntroductionDiv = newIntroductionDiv;
+                        } else {
+        // Hide and remove the new introduction div
+        if (this.newIntroductionDiv) {
+            this.newIntroductionDiv.style.display = 'none';
+            if (this.newIntroductionDiv.parentNode) {
+                this.newIntroductionDiv.parentNode.removeChild(this.newIntroductionDiv);
+            }
+            this.newIntroductionDiv = null; // Clear the reference
+        }
+                        }
+                    });
+
+        button.closest('.task').insertBefore(introduction_div, button);
+    });
+});
+
+
+
+// Get all checkboxes and alert when any is unchecked
+var checkboxes = document.querySelectorAll('.checkbox');
+checkboxes.forEach(function(checkbox) {
+    checkbox.addEventListener('change', function() {
+        if (!this.checked) {
+            // Get the closest introduction number
+            var introductionCounter = this.closest('.introduction').getAttribute('introduction_number');
+            // Get the closest task number
+            var taskCounterInt = this.closest('.task').getAttribute('task_number');
+            // Get the closest lesson number
+            var lessonCounter = this.closest('.lesson').getAttribute('lesson_number');
+            // Get the closest section number
+            var divCounter = this.closest('.section').getAttribute('section_number');
+
+            // Get the next element of the current introduction and remove it
+            var nextIntroductionDiv = this.closest('.introduction').nextElementSibling;
+            if (nextIntroductionDiv && nextIntroductionDiv.classList.contains('description')) {
+                nextIntroductionDiv.remove();
+            }
+        }
+    });
+});
+
+// Get all checkboxes and alert when any is checked or unchecked
+var checkboxes = document.querySelectorAll('.checkbox');
+checkboxes.forEach(function(checkbox) {
+    checkbox.addEventListener('change', function() {
+        if (this.checked) {
+            // Get the current section number
+            var divCounter = this.closest('.section').getAttribute('section_number');
+            // Get the current lesson number
+            var lessonCounter = this.closest('.lesson').getAttribute('lesson_number');
+            // Get the current task number
+            var taskCounterInt = this.closest('.task').getAttribute('task_number');
+            // Get the current introduction number
+            var Intoduction_couter = this.closest('.introduction').getAttribute('introduction_number');
+
+            // Create a new introduction div
+            var newIntroductionDiv = document.createElement('div');
+            newIntroductionDiv.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction description add`;
+            newIntroductionDiv.style.display = 'none'; // Initially hide the div
+            newIntroductionDiv.style.padding = '10px';
+            newIntroductionDiv.style.paddingRight = '20px';
+
+            // Add attribute to the newIntroductionDiv
+            newIntroductionDiv.setAttribute('section_number', divCounter);
+            newIntroductionDiv.setAttribute('lesson_number', lessonCounter);
+            newIntroductionDiv.setAttribute('task_number', taskCounterInt);
+
+            // Create a label for the input
+            var label = document.createElement('label');
+            label.textContent = 'Tytuł:';
+            label.className = 'label';
+            label.style.fontWeight = 'bold';
+            label.style.display = 'none';
+
+            // Create the input
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} form-control mr-2 IntroductionInput Intr`;
+            input.placeholder = 'Wpisz np. wprodwqdwwadzenie, zaznacz wszystkie prawiłowe odpowiedzi,omówienie itp';
+            input.style.margin = '10px';
+            input.disabled = true;
+            input.style.display = 'none';
+
+            // Create a label for the textarea
+            var textareaLabel = document.createElement('label');
+            textareaLabel.textContent = 'Opis:';
+            textareaLabel.className = 'label';
+            textareaLabel.style.fontWeight = 'bold';
+
+            // Create the textarea
+            var textarea = document.createElement('textarea');
+            textarea.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} form-control mr-2 DescriptionInput Treat`;
+            textarea.placeholder = 'Opis do filmu';
+            textarea.style.margin = '10px';
+            textarea.style.marginRight = '10px';
+
+            // Add attribute to the textarea
+            textarea.setAttribute('section_number', divCounter);
+            textarea.setAttribute('lesson_number', lessonCounter);
+            textarea.setAttribute('task_number', taskCounterInt);
+
+            // Create a label for the file input
+            var fileInputLabel = document.createElement('label');
+            fileInputLabel.textContent = 'Wstaw film:';
+            fileInputLabel.className = 'label';
+            fileInputLabel.style.fontWeight = 'bold';
+
+            // Create the file input
+            var fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.id = 'file';
+            fileInput.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} form-control mr-2 IntroductionInputFile Treat`;
+            fileInput.accept = 'video/*, image/*';
+            fileInput.placeholder = 'Upload a film or image here';
+            fileInput.style.margin = '10px';
+
+            // Add attribute to the file input
+            fileInput.setAttribute('section_number', divCounter);
+            fileInput.setAttribute('lesson_number', lessonCounter);
+            fileInput.setAttribute('task_number', taskCounterInt);
+
+            // Append elements to the new div
+            newIntroductionDiv.appendChild(label);
+            newIntroductionDiv.appendChild(input);
+            newIntroductionDiv.appendChild(textareaLabel);
+            newIntroductionDiv.appendChild(textarea);
+            newIntroductionDiv.appendChild(fileInputLabel);
+            newIntroductionDiv.appendChild(fileInput);
+
+            // Append the new div just after the current introduction
+            var currentIntroduction = this.closest('.introduction');
+            currentIntroduction.parentNode.insertBefore(newIntroductionDiv, currentIntroduction.nextSibling);
+
+            // Display the new div
+            newIntroductionDiv.style.display = 'block';
+
+        } else {
+            // Hide the div when unchecked
+            var currentIntroduction = this.closest('.introduction');
+            var nextIntroductionDiv = currentIntroduction.nextSibling;
+            if (nextIntroductionDiv && nextIntroductionDiv.classList.contains('description')) {
+                nextIntroductionDiv.style.display = 'none';
+            }
+        }
+    });
+});
+
+var deleteTaskButtons = document.querySelectorAll('.removeTask');
+// Remove task
+deleteTaskButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+        var lessonElement = button.closest('.lesson');
+        button.parentElement.remove();
+        // Count all tasks in the current lesson
+        var taskElements = lessonElement.querySelectorAll('.task');
+        var taskCount = taskElements.length;
+        
+        // Renumber the tasks within the parent lesson
+        for (var i = 0; i < taskCount; i++) {
+            var taskElement = taskElements[i];
+            // Get task_caption
+            var task_caption = taskElement.querySelector('.task_caption');
+            task_caption.textContent = "Zadanie " + String.fromCharCode(65 + i);
+            task_caption.style.fontWeight = 'bold';
+            // Update the class name for the task element
+            taskElement.className = taskElement.className.replace(/task_\d+/, 'task_' + (i + 1));
+            taskElement.querySelectorAll('[class*="task_"]').forEach(function(childElement) {
+                childElement.className = childElement.className.replace(/task_\d+/, 'task_' + (i + 1));
+            });
+            // Update the task_number attribute for nested elements
+            taskElement.querySelectorAll('[task_number]').forEach(function(nestedElement) {
+                nestedElement.setAttribute('task_number', i + 1);
+            });
+            // Update the task_number attribute for elements
+            taskElement.setAttribute('task_number', i + 1);
+        }
+    });
+});
+
+const createTasksButton = document.querySelectorAll('.createTaskButton');
+
+createTasksButton.forEach(function(button) {
+    button.addEventListener('click', function() {
+        const task_div = document.createElement('div');
+        const divCounter = button.closest('.section').getAttribute('section_number');
+        const lessonCounter = button.closest('.lesson').getAttribute('lesson_number');
+        let taskCounterInt = button.closest('.lesson').querySelectorAll('.task').length;
+        taskCounterInt++;
+        const taskCounter = 64 + taskCounterInt;
+
+        task_div.className = `section_${divCounter} lesson_${lessonCounter} task`;
+        task_div.setAttribute('section_number', divCounter);
+        task_div.setAttribute('lesson_number', lessonCounter);
+        task_div.setAttribute('task_number', taskCounterInt);
+
+        const task_caption = document.createElement('p');
+        task_caption.className = 'task_caption';
+        task_caption.textContent = "Zadanie " + String.fromCharCode(taskCounter);
+        task_caption.style.fontWeight = 'bold';
+        task_div.appendChild(task_caption);
+
+        task_div.style.backgroundColor = "#808080";
+        task_div.style.margin = '10px';
+        task_div.style.padding = '10px';
+
+        const TaskformInline = document.createElement('div');
+        TaskformInline.className = 'form-inline';
+
+        const label = document.createElement('label');
+        label.textContent = "Tytuł zadania: ";
+        label.style.whiteSpace = 'nowrap';
+
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} form-control mr-2 TaskInput`;
+        input.setAttribute('section_number', divCounter);
+        input.setAttribute('lesson_number', lessonCounter);
+        input.setAttribute('task_number', taskCounterInt);
+        input.style.marginLeft = '10px';
+        //add placeholder
+        input.placeholder = 'Wpisz tytuł zadania np. co widzisz? co usłyszałeś? co opiszesz? itp.';
+
+        TaskformInline.appendChild(label);
+        TaskformInline.appendChild(input);
+        task_div.appendChild(TaskformInline);
+
+        const bottomButtonIntroduction = document.createElement('button');
+        bottomButtonIntroduction.className = `btn btn-secondary bottom-button section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} createIntrdwdwoductionButton`;
+        bottomButtonIntroduction.textContent = 'Dodaj wprowadzenie'
+
+        if (taskCounterInt > 1) {
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Usuń zadanie';
+            deleteButton.style.marginLeft = '5px';
+            deleteButton.style.marginTop = '5px';
+            deleteButton.className = 'delete-button btn btn-danger btn-sm';
+
+            deleteButton.addEventListener('click', function() {
+                const parentLesson = task_div.parentNode;
+                parentLesson.removeChild(task_div);
+                taskCounterInt--;
+
+                const taskCount = parentLesson.querySelectorAll('.task').length;
+                for (let i = 0; i < taskCount; i++) {
+                    const taskElement = parentLesson.querySelectorAll('.task')[i];
+                    const task_caption = taskElement.querySelector('.task_caption');
+                    task_caption.textContent = "Zadanie " + String.fromCharCode(65 + i);
+                    task_caption.style.fontWeight = 'bold';
+
+                    taskElement.className = taskElement.className.replace(/task_\d+/, 'task_' + (i + 1));
+                    taskElement.querySelectorAll('[class*="task_"]').forEach(function(childElement) {
+                        childElement.className = childElement.className.replace(/task_\d+/, 'task_' + (i + 1));
+                    });
+
+                    taskElement.querySelectorAll('[task_number]').forEach(function(nestedElement) {
+                        nestedElement.setAttribute('task_number', i + 1);
+                    });
+
+                    taskElement.setAttribute('task_number', i + 1);
+                }
+            });
+            
+        task_div.appendChild(deleteButton);
+
+        }
+
+        //get bottomButtonIntroduction and alert sipsle message wnje is clicked
+        bottomButtonIntroduction.addEventListener('click', function() {
+            createIntroduction();
+        });
+
+
+        let Intoduction_couter = 0;
+
+        function createIntroduction() {
+            Intoduction_couter++;
+            const introduction_div = document.createElement('div');
+            const divCounter = button.closest('.section').getAttribute('section_number');
+            const lessonCounter = button.closest('.lesson').getAttribute('lesson_number');
+            let taskCounterInt = button.closest('.lesson').querySelectorAll('.task').length;
+            taskCounterInt++;
+            introduction_div.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction help`;
+            introduction_div.style.backgroundColor = "#505050";
+            introduction_div.style.margin = '10px';
+            introduction_div.style.fontWeight = 'bold';
+            introduction_div.style.padding = '10px';
+            introduction_div.style.paddingRight = '20px';
+            introduction_div.style.paddingTop = '15px';
+
+            const IntroductionformInline = document.createElement('div');
+            const createdDiv = document.createElement('div');
+            createdDiv.className = 'createdDiv';
+
+            const label = document.createElement('label');
+            label.textContent = Intoduction_couter;
+            label.className = 'introduction-text';
+
+            const label2 = document.createElement('label');
+            label2.textContent = 'Tytuł';
+            label2.className = 'label';
+
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} form-control mr-2 IntroductionInput Introd`;
+            input.placeholder = 'Wpisz np. wprowadzenie, zaznacz wszystkie prawiłowe odpowiedzi itp';
+            input.style.margin = '10px';
+
+            if (Intoduction_couter > 1) {
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Usuń';
+                deleteButton.style.marginLeft = '5px';
+                deleteButton.style.marginTop = '5px';
+                deleteButton.className = 'delete-button btn btn-danger btn-sm';
+
+                deleteButton.addEventListener('click', function() {
+                    const parentLesson = introduction_div.parentNode;
+                    parentLesson.removeChild(introduction_div);
+                    Intoduction_couter--;
+                    renumerateIntroduction(parentLesson);
+                });
+
+                introduction_div.appendChild(deleteButton);
+            }
+
+            createdDiv.appendChild(label);
+            createdDiv.appendChild(input);
+            createdDiv.style.display = 'block';
+
+            const createdDiv2 = document.createElement('div');
+            createdDiv2.className = 'createdDiv2';
+
+            const label3 = document.createElement('label');
+            label3.textContent = 'Opis: ';
+            label3.className = 'label';
+
+            const textarea = document.createElement('textarea');
+            textarea.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} form-control mr-2 DescriptionInput Introd`;
+            textarea.placeholder = 'Opis do filmu';
+            textarea.style.margin = '10px';
+
+            createdDiv2.appendChild(label3);
+            createdDiv2.appendChild(textarea);
+            createdDiv2.style.display = 'block';
+
+            const createdDiv3 = document.createElement('div');
+            createdDiv3.className = 'createdDiv';
+
+            const label4 = document.createElement('label');
+            label4.textContent = "Wstaw film:";
+            label4.className = 'label';
+
+            const input3 = document.createElement('input');
+            input3.type = 'file';
+            input3.id = 'file';
+            input3.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} form-control mr-2 IntroductionInputFile Introd `;
+            input3.accept = 'video/*, image/*';
+            input3.placeholder = 'Upload a film or image here';
+            input3.style.margin = '10px';
+
+            createdDiv3.appendChild(label4);
+            createdDiv3.appendChild(input3);
+            createdDiv3.style.display = 'block';
+
+            IntroductionformInline.appendChild(label2);
+            IntroductionformInline.appendChild(input);
+            IntroductionformInline.appendChild(label3);
+            IntroductionformInline.appendChild(textarea);
+            IntroductionformInline.appendChild(label4);
+            IntroductionformInline.appendChild(input3);
+
+
+
+            
+            // Create the checkbox
+            var checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.className = 'checkbox';
+            checkbox.style.width = '20px';
+            checkbox.style.height = '20px';
+            checkbox.style.marginLeft = '10px';
+            checkbox.style.marginBottom = '5px';
+            checkbox.style.marginRight = '5px';
+            //background color
+            checkbox.style.backgroundColor = 'black';
+
+            var labelCheckbox = document.createElement('label');
+            labelCheckbox.textContent = 'Dodaj omówienie';
+            labelCheckbox.style.color = 'white';
+            labelCheckbox.style.marginLeft = '5px';
+            labelCheckbox.style.marginTop = '15px';
+
+            // Create a container div
+            var container = document.createElement('div');
+
+            // Apply flexbox to the container
+            container.style.display = 'flex';
+            container.style.alignItems = 'center'; // This will vertically center the checkbox and label
+            //margin top
+            container.style.marginTop = '10px';
+
+
+            var StingClass = `btn btn-secondary bottom-button section_${divCounter} ` + `lesson_${lessonCounter} ` + `task_${taskCounterInt} createTaskButton`;
+
+            //get reference to the bottom button
+            var dqwdwq = document.querySelector(`.${StingClass}`);
+
+            // Add event listener to the checkbox
+            checkbox.addEventListener('change', function() {
+            // Check if the checkbox is checked
+            if (this.checked) {
+                // Get the current section number
+                var divCounter = this.closest('.section').getAttribute('section_number');
+                // Get the current lesson number
+                var lessonCounter = this.closest('.lesson').getAttribute('lesson_number');
+                // Get the current task number
+                var taskCounterInt = this.closest('.task').getAttribute('task_number');
+                // Create a new introduction div
+
+                // Count all introductions in the current task
+                let Intoduction_couter = this.closest('.task').querySelectorAll('.introduction').length;
+                newIntroductionDiv = document.createElement('div');
+                newIntroductionDiv.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction description`;
+                newIntroductionDiv.style.display = 'none'; // Initially hide the div
+                newIntroductionDiv.style.padding = '10px';
+                newIntroductionDiv.style.paddingRight = '20px';
+                // Create a label for the input
+                var label = document.createElement('label');
+                label.textContent = 'Tytuł:';
+                label.className = 'label';
+                label.style.fontWeight = 'bold';
+                label.style.display = 'none';
+                // Create the input
+                var input = document.createElement('input');
+                input.type = 'text';
+                input.style.display = 'none';
+                input.placeholder = 'Wpisz np. wprowadzenie, zaznacz wszystkie prawiłowe odpowiedzi,omówienie itp';
+                input.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} form-control mr-2 IntroductionInput Intr`;
+                input.style.margin = '10px';
+                input.disabled = true;
+
+                // Create a label for the textarea
+                var textareaLabel = document.createElement('label');
+                textareaLabel.textContent = 'Opis:';
+                textareaLabel.className = 'label';
+                textareaLabel.style.fontWeight = 'bold';
+
+                // Create the textarea
+                var textarea = document.createElement('textarea');
+                textarea.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} form-control mr-2 DescriptionInput Treat`;
+                textarea.placeholder = 'Opis do filmu';
+                textarea.style.margin = '10px';
+                textarea.style.marginRight = '10px';
+
+                // Create a label for the file input
+                var fileInputLabel = document.createElement('label');
+                fileInputLabel.textContent = 'Wstaw film:';
+                fileInputLabel.className = 'label';
+                fileInputLabel.style.fontWeight = 'bold';
+
+                // Create the file input
+                var fileInput = document.createElement('input');
+                fileInput.type = 'file';
+                fileInput.id = 'file';
+                fileInput.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} form-control mr-2 IntroductionInputFile Treat`;
+                fileInput.accept = 'video/*, image/*';
+                fileInput.placeholder = 'Upload a film or image here';
+                fileInput.style.margin = '10px';
+
+                // Append the label and input to the newIntroductionDiv
+                newIntroductionDiv.appendChild(label);
+                newIntroductionDiv.appendChild(input);
+
+                // Append the label and textarea to the newIntroductionDiv
+                newIntroductionDiv.appendChild(textareaLabel);
+                newIntroductionDiv.appendChild(textarea);
+
+                // Attach input event listener for description
+                textarea.addEventListener('input', function() {
+                    if (this.value !== '') {
+                        this.style.border = '';
+                        this.classList.remove('empty-input'); // Remove class
+                    }
+                });
+
+                // Attach input event listener for inputfile
+                fileInput.addEventListener('input', function() {
+                    if (this.value !== '') {
+                        this.style.border = '';
+                        this.classList.remove('empty-input'); // Remove class
+                    }
+                });
+
+                // Append the label and file input to the newIntroductionDiv
+                newIntroductionDiv.appendChild(fileInputLabel);
+                newIntroductionDiv.appendChild(fileInput);
+
+                //insert the newIntroductionDiv just after the parent of the checkbox
+                this.parentNode.insertAdjacentElement('afterend', newIntroductionDiv);
+
+                //display the newIntroductionDiv
+                newIntroductionDiv.style.display = 'block';
+        // Store the reference to the newIntroductionDiv in the checkbox element
+        this.newIntroductionDiv = newIntroductionDiv;
+            } else {
+        // Hide and remove the new introduction div
+        if (this.newIntroductionDiv) {
+            this.newIntroductionDiv.style.display = 'none';
+            if (this.newIntroductionDiv.parentNode) {
+                this.newIntroductionDiv.parentNode.removeChild(this.newIntroductionDiv);
+            }
+            this.newIntroductionDiv = null; // Clear the reference
+        }   
+    }
+            
+            });
+
+// Append the container to the IntroductionformInline
+IntroductionformInline.appendChild(container);
+
+const addQuestionButton = document.createElement('button');
+addQuestionButton.className = 'btn btn-secondary bottom-button createQuestionButton';
+addQuestionButton.textContent = 'Dodaj pytanie';
+addQuestionButton.style.marginTop = '5px';
+addQuestionButton.style.marginLeft = '5px';
+
+introduction_div.appendChild(IntroductionformInline);
+introduction_div.appendChild(addQuestionButton);
+
+//append the checkbox and label to the task_div but under the Dodaj pytanie button
+introduction_div.appendChild(checkbox);
+introduction_div.appendChild(labelCheckbox);
+
+task_div.appendChild(introduction_div);
+task_div.appendChild(bottomButtonIntroduction);
+
+let questionsCounter = 0;
+
+function createQuestions() {
+    questionsCounter++;
+    var questions_div = document.createElement('div');
+    questions_div.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} question_${questionsCounter} question`;
+    questions_div.style.backgroundColor = "#202020"; // This is an even darker shade of gray
+    questions_div.style.margin = '10px';
+    questions_div.style.paddingTop = '30px';
+    questions_div.style.paddingBottom = '30px';
+    questions_div.style.paddingLeft = '10px';
+    questions_div.style.paddingRight = '10px';
+    questions_div.style.color = 'white';
+                             // After creating the questions_div, add these lines
+                             questions_div.style.position = 'relative'; // Make the div relative
+
+if (questionsCounter > 1) {
+    // Create the button
+    var button = document.createElement('button');
+    button.textContent = 'Usuń pytanie'; // Set the button text
+    button.className = 'btn btn-danger btn-sm'; // Add Bootstrap's button classes
+    button.style.position = 'absolute'; // Make the button absolute
+    button.style.top = '5px'; // Set the top position to 5px
+    button.style.right = '5px'; // Set the right position to 5px
+
+    // Add event listener to the button
+    button.addEventListener('click', function() {
+        questions_div.remove(); // Remove the questions_div when the button is clicked
+        questionsCounter--; // Decrement the questionsCounter
+        renumerateQuestions(introduction_div);
+
+        // Get all questions in the current introduction
+        var questionElements = introduction_div.querySelectorAll('.question');
+        var questionCount = questionElements.length;
+
+        // Renumber the questions within the parent introduction
+        for (var i = 0; i < questionCount; i++) {
+            var questionElement = questionElements[i];
+            var questionNumberLabel = questionElement.querySelector('.question-number');
+            var newQuestionNumber = i + 1;
+
+            questionNumberLabel.textContent = 'Pytanie: ' + newQuestionNumber;
+
+            questionElement.setAttribute('question_number', newQuestionNumber);
+            questionNumberLabel.setAttribute('question_number', newQuestionNumber);
+
+            questionElement.className = questionElement.className.replace(/question_\d+/, 'question_' + newQuestionNumber);
+            questionElement.querySelectorAll('[class*="question_"]').forEach(function(childElement) {
+                childElement.className = childElement.className.replace(/question_\d+/, 'question_' + newQuestionNumber);
+            });
+        }
+    });
+
+                             // Append the button to the questions_div
+                             questions_div.appendChild(button);
+                         }
+
+                         // Create the button
+                         var button = document.createElement('button');
+                         button.textContent = 'Usuń pytanie'; // Set the button text
+                         button.className = 'btn btn-danger btn-sm'; // Add Bootstrap's button classes
+                         button.style.position = 'absolute'; // Make the button absolute
+                         button.style.top = '5px'; // Set the top position to 5px
+                         button.style.right = '5px'; // Set the right position to 5px
+
+
+                         //create a Bootstrap form group with inline form
+                         var QuestionsformInline = document.createElement('div');
+
+                         //create a label input to the QuestionsformInline
+                         var label = document.createElement('label');
+                         label.textContent = `Pytanie: ${questionsCounter}`
+                         label.className = 'label form-control-label mr-2 question-number'; // Add margin to the right and the question-numbe
+
+                         QuestionsformInline.className = 'form-inline'; // Add Bootstrap's form-inline class
+
+                         //create the input
+                         var input = document.createElement('input');
+                         input.type = 'text';
+                         input.className = `form-control mr-2 section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} question_${questionsCounter} questionInput Introd`; // Add Bootstrap's form-control class and margin to the right
+                         //add placeholder
+                            input.placeholder = 'Wpisz pytanie';
+                         //create a select
+                         var select = document.createElement('select');
+                         select.className = `form-control custom-select section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter}  question_${questionsCounter} questionCorrectSelect`; // Add Bootstrap's custom-select class
+                         select.style.width = '200px';
+                         select.style.marginLeft = '10px'; // Add margin to the left
+
+                         //create options
+                         var option1 = document.createElement('option');
+                         option1.value = 'Poprawne';
+                         option1.text = 'Poprawne';
+
+                         var option2 = document.createElement('option');
+                         option2.value = 'Niepoprawne';
+                         option2.text = 'Niepoprawne';
+
+                         //create a select
+                         var select2 = document.createElement('select');
+                         select2.className = `form-control custom-select section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter}  question_${questionsCounter} questionActiveSelect`; // Add Bootstrap's custom-select class
+                         select2.style.width = '200px';
+                         select2.style.marginLeft = '10px'; // Add margin to the left
+                         //create options
+                         var select2option1 = document.createElement('option');
+                         select2option1.value = 'Aktywne';
+                         select2option1.text = 'Aktywne';
+
+                         var select2option2 = document.createElement('option');
+                         select2option2.value = 'Nieaktywne';
+                         select2option2.text = 'Nieaktywne';
+
+                         //add options to the select
+                         select.appendChild(option1);
+                         select.appendChild(option2);
+                         select2.appendChild(select2option1);
+                         select2.appendChild(select2option2);
+
+                         //add label, input, and select to the QuestionsformInline
+                         QuestionsformInline.appendChild(label);
+                         QuestionsformInline.appendChild(input);
+                         QuestionsformInline.appendChild(select);
+                         QuestionsformInline.appendChild(select2);
+
+                         //append the form inline to the new div
+                         questions_div.appendChild(QuestionsformInline);
+                         introduction_div.insertBefore(questions_div, addQuestionButton);
+}
+
+// Add event listener to the button
+addQuestionButton.addEventListener('click', createQuestions);
+
+// Initial call to createQuestions if needed
+createQuestions();
+        }
+
+        createIntroduction();
+        button.parentNode.insertBefore(task_div, button);
+    });
+});
+
+delete_question_button = document.querySelectorAll('.delete_question_button');
+delete_question_button.forEach(function(button) {
+    button.addEventListener('click', function() {
+        var parentQuestion = button.closest('.question');
+        var parentIntroduction = button.closest('.introduction');
+        parentQuestion.remove();
+
+        var questionCount = parentIntroduction.querySelectorAll('.question').length;
+
+        for (var i = 0; i < questionCount; i++) {
+            var questionElement = parentIntroduction.querySelectorAll('.question')[i];
+            var questionNumberLabel = questionElement.querySelector('.question-number');
+            var newQuestionNumber = i + 1;
+
+            questionNumberLabel.textContent = 'Pytanie: ' + newQuestionNumber;
+
+            questionElement.setAttribute('question_number', newQuestionNumber);
+            questionNumberLabel.setAttribute('question_number', newQuestionNumber);
+
+            questionElement.className = questionElement.className.replace(/question_\d+/, 'question_' + newQuestionNumber);
+            questionElement.querySelectorAll('[class*="question_"]').forEach(function(childElement) {
+                childElement.className = childElement.className.replace(/question_\d+/, 'question_' + newQuestionNumber);
+            });
+
+            // Update the attributes of label and input elements within the question
+            questionElement.querySelectorAll('label, input, select').forEach(function(element) {
+                element.setAttribute('question_number', newQuestionNumber);
+                element.className = element.className.replace(/question_\d+/, 'question_' + newQuestionNumber);
+            });
+        }
+    });
+});
+
+
+var deleteQuestionButtons = document.querySelectorAll('.delete_question_button');
+deleteQuestionButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+        var parentQuestion = button.closest('.question');
+        var parentIntroduction = button.closest('.introduction');
+        parentQuestion.remove();
+        
+        // Count all questions inside the closest introduction after removal
+        var questionCount = parentIntroduction.querySelectorAll('.question').length;
+        
+        // Renumerate the question-number labels, update question_number attribute, and update class names
+        for (var i = 0; i < questionCount; i++) {
+            var questionElement = parentIntroduction.querySelectorAll('.question')[i];
+            var questionNumberLabel = questionElement.querySelector('.question-number');
+            var newQuestionNumber = i + 1;
+            
+            // Update the question number label text
+            questionNumberLabel.textContent = 'Pytanie ' + newQuestionNumber + ':';
+            
+            // Update the question_number attribute
+            questionElement.setAttribute('question_number', newQuestionNumber);
+            questionNumberLabel.setAttribute('question_number', newQuestionNumber);
+            
+            // Update the class names
+            questionElement.className = questionElement.className.replace(/question_\d+/, 'question_' + newQuestionNumber);
+            questionElement.querySelectorAll('[class*="question_"]').forEach(function(childElement) {
+                childElement.className = childElement.className.replace(/question_\d+/, 'question_' + newQuestionNumber);
+            });
+        }
+    });
+});
+
+
+var createQuestionButtons = document.querySelectorAll('.createQuestionButton');
+createQuestionButtons.forEach(function(buttoncreate) {
+    buttoncreate.addEventListener('click', function() {
+        var questions_div = document.createElement('div');
+        // Get the section number from the current section div
+        var divCounter = buttoncreate.closest('.section').getAttribute('section_number');
+        // get the closest lesson number
+        var lessonCounter = buttoncreate.closest('.lesson').getAttribute('lesson_number');
+        // get the closest task number
+        var taskCounterInt = buttoncreate.closest('.task').getAttribute('task_number');
+        // get the closest introduction number
+        var Intoduction_couter = buttoncreate.closest('.introduction').getAttribute('introduction_number');
+
+        // count all questions div in the current introduction
+        var questionsCounter = buttoncreate.closest('.introduction').querySelectorAll('.question').length;
+        questionsCounter++;
+
+        questions_div.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} question_${questionsCounter} question`;
+        questions_div.setAttribute('section_number', divCounter);
+        questions_div.setAttribute('lesson_number', lessonCounter);
+        questions_div.setAttribute('task_number', taskCounterInt);
+        questions_div.setAttribute('introduction_number', Intoduction_couter);
+        questions_div.setAttribute('question_number', questionsCounter);
+        questions_div.style.backgroundColor = "#202020"; // This is an even darker shade of gray
+        questions_div.style.margin = '10px';
+        questions_div.style.paddingTop = '30px';
+        questions_div.style.paddingBottom = '30px';
+        questions_div.style.paddingLeft = '10px';
+        questions_div.style.paddingRight = '10px';
+        questions_div.style.color = 'white';
+        questions_div.style.position = 'relative'; // Make the div relative
+
+        if (questionsCounter > 1) {
+            // Create the button
+            var button = document.createElement('button');
+            button.textContent = 'Usuń pytanie'; // Set the button text
+            button.className = 'btn btn-danger btn-sm'; // Add Bootstrap's button classes
+            button.style.position = 'absolute'; // Make the button absolute
+            button.style.top = '5px'; // Set the top position to 5px
+            button.style.right = '5px'; // Set the right position to 5px
+
+        // Add event listener to the button
+        button.addEventListener('click', function() {
+        
+            questions_div.remove(); // Remove the questions_div when the button is clicked
+            questionsCounter--; // Decrement the questionsCounter
+            // Get the parent introduction div and select all questions inside it with the class name question
+            var parentIntroduction = buttoncreate.closest('.introduction');
+            // Renumerate the questions within the parent introduction
+            // Count all questions inside the closest introduction after removal
+            var questionCount = parentIntroduction.querySelectorAll('.question').length;
+            // Renumerate the question-number labels, update question_number attribute, and update class names
+            for (var i = 0; i < questionCount; i++) {
+                var questionElement = parentIntroduction.querySelectorAll('.question')[i];
+                var questionNumberLabel = questionElement.querySelector('.question-number');
+        var newQuestionNumber = i + 1;
+
+        // Update the question number label text
+        questionNumberLabel.textContent = 'Pytanie: ' + newQuestionNumber + '';
+
+        // Update the question_number attribute
+        questionElement.setAttribute('question_number', newQuestionNumber);
+        questionNumberLabel.setAttribute('question_number', newQuestionNumber);
+
+        // Update the class names
+        questionElement.className = questionElement.className.replace(/question_\d+/, 'question_' + newQuestionNumber);
+        questionElement.querySelectorAll('[class*="question_"]').forEach(function(childElement) {
+            childElement.className = childElement.className.replace(/question_\d+/, 'question_' + newQuestionNumber);
+        });
+
+        // Update the question_number attribute for nested elements
+        questionElement.querySelectorAll('[question_number]').forEach(function(nestedElement) {
+            nestedElement.setAttribute('question_number', newQuestionNumber);
+        });
+    }
+});
+
+            // Append the button to the questions_div
+            questions_div.appendChild(button);
+        }
+
+        // Create the button
+        var button = document.createElement('button');
+        button.textContent = 'Usuń pytanie'; // Set the button text
+        button.className = 'btn btn-danger btn-sm'; // Add Bootstrap's button classes
+        button.style.position = 'absolute'; // Make the button absolute
+        button.style.top = '5px'; // Set the top position to 5px
+        button.style.right = '5px'; // Set the right position to 5px
+        //create a Bootstrap form group with inline form
+        var QuestionsformInline = document.createElement('div');
+        //create a label input to the QuestionsformInline
+        var label = document.createElement('label');
+        label.textContent = `Pytanie: ${questionsCounter}`
+        label.className = 'label form-control-label mr-2 question-number'; // Add margin to the right and the question-numbe
+
+        QuestionsformInline.className = 'form-inline'; // Add Bootstrap's form-inline class
+        // Insert the new div before the button
+
+        //create the input
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.className = `form-control mr-2 section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} question_${questionsCounter} questionInput Introd`; // Add Bootstrap's form-control class and margin to the right
+        //add attribute to the input
+        input.setAttribute('section_number', divCounter);
+        input.setAttribute('lesson_number', lessonCounter);
+        input.setAttribute('task_number', taskCounterInt);
+        input.setAttribute('introduction_number', Intoduction_couter);
+        input.setAttribute('question_number', questionsCounter);
+        input.placeholder = 'Wpisz pytanie';
+        //create a select
+        var select = document.createElement('select');
+        select.className = `form-control custom-select section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} question_${questionsCounter} questionCorrectSelect`; // Add Bootstrap's custom-select class
+        //add attribute to the select
+        select.setAttribute('section_number', divCounter);
+        select.setAttribute('lesson_number', lessonCounter);
+        select.setAttribute('task_number', taskCounterInt);
+        select.setAttribute('introduction_number', Intoduction_couter);
+        select.setAttribute('question_number', questionsCounter);
+
+        select.style.width = '200px';
+        select.style.marginLeft = '10px'; // Add margin to the left
+
+        //create options
+        var option1 = document.createElement('option');
+        option1.value = 'Poprawne';
+        option1.text = 'Poprawne';
+
+        var option2 = document.createElement('option');
+        option2.value = 'Niepoprawne';
+        option2.text = 'Niepoprawne';
+
+        //create a select
+        var select2 = document.createElement('select');
+        select2.className = `form-control custom-select section_${divCounter}  lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} question_${questionsCounter} questionActiveSelect`; // Add Bootstrap's custom-select class
+        //add attribute to the select
+        select2.setAttribute('section_number', divCounter);
+        select2.setAttribute('lesson_number', lessonCounter);
+        select2.setAttribute('task_number', taskCounterInt);
+        select2.setAttribute('introduction_number', Intoduction_couter);
+        select2.setAttribute('question_number', questionsCounter);
+        select2.style.width = '200px';
+        select2.style.marginLeft = '10px'; // Add margin to the left
+
+        //create options
+        var select2option1 = document.createElement('option');
+        select2option1.value = 'Aktywne';
+        select2option1.text = 'Aktywne';
+
+        var select2option2 = document.createElement('option');
+        select2option2.value = 'Nieaktywne';
+        select2option2.text = 'Nieaktywne';
+
+        //add options to the select
+        select.appendChild(option1);
+        select.appendChild(option2);
+        select2.appendChild(select2option1);
+        select2.appendChild(select2option2);
+
+        //add label, input, and select to the QuestionsformInline
+        QuestionsformInline.appendChild(label);
+        QuestionsformInline.appendChild(input);
+        QuestionsformInline.appendChild(select);
+        QuestionsformInline.appendChild(select2);
+
+        //append the form inline to the new div
+        questions_div.appendChild(QuestionsformInline);
+        buttoncreate.parentNode.insertBefore(questions_div, buttoncreate);
+    });
+});
+
+
+
+var SendButton = document.getElementById('SendButton');
+var divCounter_section = '<%= section._id %>';
+var divCounter = 1;
+var lessonCounter = `<%= section.lessons.length %>`;
+
+function createLesson() {
+
+    var lessonCounter = document.querySelectorAll('.lesson').length;
+lessonCounter++;
+var lesson_div = document.createElement('div');
+lesson_div.className = `section_${divCounter} ` + 'lesson';
+
+// Create a span for the lesson text
+var lesson_caption = document.createElement('span');
+lesson_caption.className = 'lesson-text lesson_numbers'; // Add a class to the lesson text
+lesson_caption.textContent = 'Lekcja: ' + lessonCounter;
+// add font weight
+lesson_caption.style.fontWeight = 'bold';
+lesson_div.appendChild(lesson_caption);
+
+// Create the Bootstrap form group with inline form
+var LessonformInline = document.createElement('div');
+LessonformInline.className = 'form-inline2 ';
+
+//Create a label and select for the lesson with the status_of_lesson with attributes and classes and options
+var labelStatus = document.createElement('label');
+labelStatus.textContent = 'Status lekcji: ';
+labelStatus.className = 'label form-control-label';
+//create a select
+var select = document.createElement('select');
+select.className = `form-control custom-select section_${divCounter} lesson_${lessonCounter} StatusLessonSelect`; // Add Bootstrap's custom-select class
+select.style.width = '200px';
+select.style.marginLeft = '10px'; // Add margin to the left
+//create options
+var option1 = document.createElement('option');
+option1.value = true;
+option1.text = 'Aktywna';
+
+var option2 = document.createElement('option');
+option2.value = false;
+option2.text = 'Nieaktywna';
+
+//add options to the select
+select.appendChild(option1);
+select.appendChild(option2);
+
+//add label and select to the LessonformInline
+LessonformInline.appendChild(labelStatus);
+LessonformInline.appendChild(select);
+
+// Append the form inline to the new div
+lesson_div.appendChild(LessonformInline);
+
+// Create a new form group for the title
+var titleFormGroup = document.createElement('div');
+titleFormGroup.className = 'form-inline ';
+
+// Create the label for the title
+var labelTitle = document.createElement('label');
+labelTitle.textContent = 'Tytuł lekcji: ';
+labelTitle.className = 'label';
+
+// Create the input for the title
+var input = document.createElement('input');
+input.type = 'text';
+input.className = `section_${divCounter} ` + `lesson_${lessonCounter} ` + 'form-control mr-2 TitleLessonInput '; // margin right for spacing
+input.placeholder = 'Wpisz tytuł lekcji';
+
+// Append label and input to the title form group
+titleFormGroup.appendChild(labelTitle);
+titleFormGroup.appendChild(input);
+
+// Append the title form group to the new div
+lesson_div.appendChild(titleFormGroup);
+
+// Create the bottom button
+var bottomButtonTask = document.createElement('button');
+bottomButtonTask.className = 'btn btn-secondary bottom-button createTaskButton';
+bottomButtonTask.textContent = 'Utwórz zadanie';
+
+// Append the bottom button to the new div
+lesson_div.appendChild(bottomButtonTask);
+
+// Add background color
+lesson_div.style.backgroundColor = 'darkgray';
+//add margin
+lesson_div.style.margin = '10px';
+//add padding
+lesson_div.style.padding = '10px';
+
+  // Add delete button except for the first lesson
+  if (lessonCounter > 1) {
+    var deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Usuń lekcję';
+    // Add a class to the delete button
+    deleteButton.className = 'delete-button btn btn-danger btn-sm';
+    deleteButton.addEventListener('click', function() {
+      // Get the parent of the lesson div (should be the section)
+      var parentSection = lesson_div.parentNode;
+
+      // Remove the entire lesson div
+      parentSection.removeChild(lesson_div);
+      lessonCounter--;
+      
+      //count all lessons in the current section
+        var lessonCount = parentSection.querySelectorAll('.lesson').length;
+        //get lesson-text elements in the lessonCount
+        var lessonTextElements = parentSection.querySelectorAll('.lesson-text');
+        //renumerate the lessons within the parent section
+        for (var i = 0; i < lessonCount; i++) {
+          var lessonElement = parentSection.querySelectorAll('.lesson')[i];
+          var lessonNumberLabel = lessonElement.querySelector('.lesson-text');
+          var newLessonNumber = i + 1;
+          lessonNumberLabel.textContent = 'Lekcja: ' + newLessonNumber;
+          lessonElement.setAttribute('lesson_number', newLessonNumber);
+          lessonNumberLabel.setAttribute('lesson_number', newLessonNumber);
+          lessonElement.className = lessonElement.className.replace(/lesson_\d+/, 'lesson_' + newLessonNumber);
+          lessonElement.querySelectorAll('[class*="lesson_"]').forEach(function(childElement) {
+            childElement.className = childElement.className.replace(/lesson_\d+/, 'lesson_' + newLessonNumber);
+          });
+        }
+    });
+    lesson_div.appendChild(deleteButton);
+  }
+
+  //insert before the create lesson button
+  document.querySelector('.createLessonButton').insertAdjacentElement('beforebegin', lesson_div);
+  renumerateLessons();
+
+  //create a new counter for tasks starting from A
+  var taskCounter = 64; // ASCII code for 'A'
+  var taskCounterInt = 0;
+
+  function createTasks() {
+
+    taskCounter++;
+    taskCounterInt++;
+    var task_div = document.createElement('div');
+    task_div.className = `section_${divCounter} + lesson_${lessonCounter}` + ' task';
+  
+    // Create a span for the task text  
+    var task_caption = document.createElement('span');
+    task_caption.className = 'task-text'; // Add a class to the task
+    task_caption.textContent = "Zadanie " + String.fromCharCode(taskCounter);
+
+    // Add font weight
+    task_caption.style.fontWeight = 'bold';
+    task_div.appendChild(task_caption);
+    task_div.style.backgroundColor = "#808080"; // This is a darker grey color
+    task_div.style.margin = '10px';
+    task_div.style.padding = '10px';
+
+    // Create the Bootstrap form group with inline form
+    var TaskformInline = document.createElement('div');
+    TaskformInline.className = 'form-inline';
+
+    // Create the label
+    var label = document.createElement('label');
+    label.textContent = 'Treść zadania: ';
+    label.className = 'label form-control-label';
+  
+    // Create the input
+    var input = document.createElement('input');
+    input.type = 'text';
+    input.className = `section_${divCounter} ` + `lesson_${lessonCounter} ` + `task_${taskCounterInt} ` + 'form-control mr-2 TaskInput'; // margin right for spacing
+
+    // Append label and input to the form inline
+    TaskformInline.appendChild(label);
+    TaskformInline.appendChild(input);
+
+    // Append the form inline to the new div
+    task_div.appendChild(TaskformInline);
+
+    //Create the bottom button
+    var bottomButtonIntroduction = document.createElement('button');
+    bottomButtonIntroduction.className = `btn btn-secondary bottom-button section_${divCounter} ` + `lesson_${lessonCounter} ` + `task_${taskCounterInt} createTaskButton`;
+    bottomButtonIntroduction.textContent = 'Utwórz';
+
+    // Append the bottom button to the new div
+    task_div.appendChild(bottomButtonIntroduction);
+
+    if (taskCounterInt > 1) {
+
+    var deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Usuń zadanie';
+    deleteButton.style.marginLeft = '5px';
+    deleteButton.style.marginTop = '5px';
+    // Add a class to the delete button
+    deleteButton.className = 'delete-button btn btn-danger btn-sm';
+    deleteButton.addEventListener('click', function() {
+    // Get the parent of the task div (should be the lesson_div)
+    var parentLesson = task_div.parentNode;
+
+    // Remove the entire task div
+    parentLesson.removeChild(task_div);
+    taskCounter--;
+    taskCounterInt--;
+
+    //get all tasks in the current lesson
+    var taskElements = parentLesson.querySelectorAll('.task');
+    //get all tax-text elements in the lesson
+    var taskTextElements = parentLesson.querySelectorAll('.task-text');
+    //renumeeate taskElements within the parent lesson
+    for (var i = 0; i < taskElements.length; i++) {
+      var taskElement = taskElements[i];
+      var taskNumberLabel = taskElement.querySelector('.task-text');
+      var newTaskNumber = i + 1;
+      taskNumberLabel.textContent = 'Zadanie ' + String.fromCharCode(64 + newTaskNumber);
+      taskElement.setAttribute('task_number', newTaskNumber);
+      taskNumberLabel.setAttribute('task_number', newTaskNumber);
+      taskElement.className = taskElement.className.replace(/task_\d+/, 'task_' + newTaskNumber);
+      taskElement.querySelectorAll('[class*="task_"]').forEach(function(childElement) {
+        childElement.className = childElement.className.replace(/task_\d+/, 'task_' + newTaskNumber);
+      });
+    }
+
+    //renumerate lesson_class of parent node
+    renumerateTasks(parentLesson);
+
+
+    });
+    task_div.appendChild(deleteButton);
+    }
+
+    // Insert the task div before the createTaskButton
+    lesson_div.insertBefore(task_div, bottomButtonTask);
+
+    console.log('Task created:', task_div); // Debug log
+    var Intoduction_couter = 0;
+
+    function createIntroduction() { 
+
+
+
+
+
+
+
+
+
+
+    Intoduction_couter++;
+
+    var introduction_div = document.createElement('div');
+    introduction_div.className = `section_${divCounter} + lesson_${lessonCounter} + task_${taskCounterInt}` + ' introduction help';
+    introduction_div.style.backgroundColor = "#505050"; // This is a silver color
+    introduction_div.style.margin = '10px';
+    introduction_div.style.fontWeight = 'bold';
+    introduction_div.style.padding = '10px';
+    introduction_div.style.paddingRight = '20px';
+    //padding top
+    introduction_div.style.paddingTop = '15px';
+    //create a Bootstrap form group with inline form
+    var IntroductionformInline = document.createElement('div');
+
+    var createdDiv = document.createElement('div');
+    createdDiv.className = 'createdDiv';
+
+    //add label input to the IntroductionformInline
+    var label = document.createElement('label');
+    label.textContent = Intoduction_couter
+    label.className = 'introduction-text';
+
+
+    // Create the label
+    var label = document.createElement('label');
+    label.textContent = 'Tytuł';
+    label.className = 'label';
+
+    // Create the input
+    var input = document.createElement('input');
+    input.type = 'text';
+
+    input.className = `section_${divCounter} ` + `lesson_${lessonCounter} ` + `task_${taskCounterInt} ` + `introduction_${Intoduction_couter} ` + 'form-control mr-2 IntroductionInput Introd'; // margin right for spacing
+    input.placeholder = 'Wpisz np. wprowadzenie, zaznacz wszystkie prawiłowe odpowiedzi,omówienie itp';
+    //add margin
+    input.style.margin = '10px';
+    function updateIntroductionClasses(parentLesson) {
+    // Select all introduction elements within the parent lesson
+    const introductions = parentLesson.querySelectorAll('.introduction');
+
+    // Loop through each element and update its class
+    introductions.forEach((introduction, index) => {
+        const newIntroductionNumber = index + 1;
+
+        // Update the class for the introduction
+        introduction.className = introduction.className.replace(/introduction_\d+/, 'introduction_' + newIntroductionNumber);
+
+        // Update the class for the description
+        const description = introduction.querySelector('.DescriptionInput');
+        if (description) {
+            description.className = description.className.replace(/introduction_\d+/, 'introduction_' + newIntroductionNumber);
+        }
+
+        // Update the class for the file input
+        const fileInput = introduction.querySelector('.IntroductionInputFile');
+        if (fileInput) {
+            fileInput.className = fileInput.className.replace(/introduction_\d+/, 'introduction_' + newIntroductionNumber);
+        }
+
+        // Update the class for the question elements
+        const questions = introduction.querySelectorAll('.question');
+        questions.forEach((question, qIndex) => {
+            question.className = question.className.replace(/introduction_\d+/, 'introduction_' + newIntroductionNumber);
+            const questionInput = question.querySelector('.questionInput');
+            if (questionInput) {
+                questionInput.className = questionInput.className.replace(/introduction_\d+/, 'introduction_' + newIntroductionNumber);
+            }
+            const questionCorrectSelect = question.querySelector('.questionCorrectSelect');
+            if (questionCorrectSelect) {
+                questionCorrectSelect.className = questionCorrectSelect.className.replace(/introduction_\d+/, 'introduction_' + newIntroductionNumber);
+            }
+            const questionActiveSelect = question.querySelector('.questionActiveSelect');
+            if (questionActiveSelect) {
+                questionActiveSelect.className = questionActiveSelect.className.replace(/introduction_\d+/, 'introduction_' + newIntroductionNumber);
+            }
+        });
+    });
+}
+
+// Add delete button except for the first time
+if (Intoduction_couter > 1) {
+    var deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Usuń wprowadzenie';
+    deleteButton.style.marginLeft = '5px';
+    deleteButton.style.marginTop = '5px';
+    // Add a class to the delete button
+    deleteButton.className = 'delete-button btn btn-danger btn-sm';
+
+    deleteButton.addEventListener('click', function() {
+        // Get the parent of the task div (should be the lesson_div)
+        var parentLesson = introduction_div.parentNode;
+
+        // Remove the entire task div
+        parentLesson.removeChild(introduction_div);
+        Intoduction_couter--;
+
+        // Renumerate the tasks within the parent lesson
+        renumerateIntroduction(parentLesson);
+
+        // Update the classes of the remaining introductions
+        updateIntroductionClasses(parentLesson);
+    });
+
+    // Append the delete button to the introduction div
+    introduction_div.appendChild(deleteButton);
+}
+
+    createdDiv.appendChild(label);
+    createdDiv.appendChild(input);
+    //display block 
+    createdDiv.style.display = 'block';
+
+    //do the label2 and instead of input2 create a textarea
+
+    createdDiv2 = document.createElement('div');
+    createdDiv2.className = 'createdDiv2';
+
+    var label2 = document.createElement('label');
+    label2.textContent = 'Opis: ';
+    label2.className = 'label';
+
+    // Create the input
+    var textarea = document.createElement('textarea');
+    textarea.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} form-control mr-2 DescriptionInput Introd`; // margin right for spacing
+    textarea.placeholder = 'Opis do filmu';
+    textarea.style.margin = '10px';
+
+    createdDiv2.appendChild(label2);
+    createdDiv2.appendChild(textarea);
+    createdDiv2.style.display = 'block';
+
+    var createdDiv3 = document.createElement('div');
+    createdDiv3.className = 'createdDiv';
+
+    //add label input to the IntroductionformInline
+    var label3 = document.createElement('label');
+    label3.textContent = "Wstaw film:"
+    label3.className = 'label';
+    // Create the input
+    var input3 = document.createElement('input');
+    input3.type = 'file';
+    //add id
+    input3.id = 'file';
+    input3.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} form-control mr-2 IntroductionInputFile Introd`; // margin right for spacing
+    input3.accept = 'video/*, image/*'; // accept both video and image files
+    input3.placeholder = 'Upload a film or image here';
+    //add margin
+    input3.style.margin = '10px';
+
+    createdDiv3.appendChild(label3);
+    createdDiv3.appendChild(input3);
+    //display block 
+    createdDiv3.style.display = 'block';
+
+
+    // Append label and input to the form inline
+    IntroductionformInline.appendChild(label);
+    IntroductionformInline.appendChild(input);
+    IntroductionformInline.appendChild(label2);
+    IntroductionformInline.appendChild(textarea);
+    IntroductionformInline.appendChild(label3);
+    IntroductionformInline.appendChild(input3);
+
+
+    //create a button Add Question  
+    var addQuestionButton = document.createElement('button');
+    addQuestionButton.className = 'btn btn-secondary bottom-button createQuestionButton';
+    addQuestionButton.textContent = 'Dodaj pytanie';
+    addQuestionButton.style.marginTop = '5px';
+    addQuestionButton.style.marginLeft = '5px';
+
+
+
+    //appemd the form inline to the introduction div
+    introduction_div.appendChild(IntroductionformInline);
+
+    // Append the bottom button to the new div
+    introduction_div.appendChild(addQuestionButton);
+
+
+    task_div.appendChild(introduction_div);
+
+    task_div.insertBefore(introduction_div, bottomButtonIntroduction);
+
+
+    task_div.appendChild(introduction_div);
+
+    task_div.insertBefore(introduction_div, bottomButtonIntroduction);
+
+    var questionsCounter = 0;
+
+    function createQuestions() {
+        questionsCounter++;
+
+        var questions_div = document.createElement('div');
+        questions_div.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} question_${questionsCounter} question`;
+        questions_div.style.backgroundColor = "#202020"; // This is an even darker shade of gray
+        questions_div.style.margin = '10px';
+        questions_div.style.paddingTop = '30px';
+        questions_div.style.paddingBottom = '30px';
+        questions_div.style.paddingLeft = '10px';
+        questions_div.style.paddingRight = '10px';
+        questions_div.style.color = 'white';
+
+        // After creating the questions_div, add these lines
+        questions_div.style.position = 'relative'; // Make the div relative
+
+        if (questionsCounter > 1) {
+            // Create the button
+            var button = document.createElement('button');
+            button.textContent = 'Usuń pytanie'; // Set the button text
+            button.className = 'btn btn-danger btn-sm'; // Add Bootstrap's button classes
+            button.style.position = 'absolute'; // Make the button absolute
+            button.style.top = '5px'; // Set the top position to 5px
+            button.style.right = '5px'; // Set the right position to 5px
+
+            // Add event listener to the button
+            button.addEventListener('click', function() {
+                questions_div.remove(); // Remove the questions_div when the button is clicked
+                questionsCounter--; // Decrement the questionsCounter
+                renumerateQuestions(introduction_div);
+
+                //count all questions in the current introduction
+                var questionCount = introduction_div.querySelectorAll('.question').length;
+                //get question-text elements in the questionCount
+                var questionTextElements = introduction_div.querySelectorAll('.question-text');
+                //renumerate the questions within the parent introduction
+                for (var i = 0; i < questionCount; i++) {
+                    var questionElement = introduction_div.querySelectorAll('.question')[i];
+                    var questionNumberLabel = questionElement.querySelector('.question-number');
+                    var newQuestionNumber = i + 1;
+                    questionNumberLabel.textContent = 'Pytanie: ' + newQuestionNumber;
+                    questionElement.setAttribute('question_number', newQuestionNumber);
+                    questionNumberLabel.setAttribute('question_number', newQuestionNumber);
+                    questionElement.className = questionElement.className.replace(/question_\d+/, 'question_' + newQuestionNumber);
+                    questionElement.querySelectorAll('[class*="question_"]').forEach(function(childElement) {
+                        childElement.className = childElement.className.replace(/question_\d+/, 'question_' + newQuestionNumber);
+                    });
+                }
+
+            });
+
+            // Append the button to the questions_div
+            questions_div.appendChild(button);
+        }
+
+        // Create the button
+        var button = document.createElement('button');
+        button.textContent = 'Usuń pytanie'; // Set the button text
+        button.className = 'btn btn-danger btn-sm'; // Add Bootstrap's button classes
+        button.style.position = 'absolute'; // Make the button absolute
+        button.style.top = '5px'; // Set the top position to 5px
+        button.style.right = '5px'; // Set the right position to 5px
+
+
+        //create a Bootstrap form group with inline form
+        var QuestionsformInline = document.createElement('div');
+
+        //create a label input to the QuestionsformInline
+        var label = document.createElement('label');
+        label.textContent = `Pytanie: ${questionsCounter}`
+        label.className = 'label form-control-label mr-2 question-number'; // Add margin to the right and the question-numbe
+
+        QuestionsformInline.className = 'form-inline'; // Add Bootstrap's form-inline class
+
+        //create the input
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.className = `form-control mr-2 section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} question_${questionsCounter} questionInput Introd`; // Add Bootstrap's form-control class and margin to the right
+
+        //create a select
+        var select = document.createElement('select');
+        select.className = `form-control custom-select section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter}  question_${questionsCounter} questionCorrectSelect`; // Add Bootstrap's custom-select class
+        select.style.width = '200px';
+        select.style.marginLeft = '10px'; // Add margin to the left
+
+        //create options
+        var option1 = document.createElement('option');
+        option1.value = 'Poprawne';
+        option1.text = 'Poprawne';
+
+        var option2 = document.createElement('option');
+        option2.value = 'Niepoprawne';
+        option2.text = 'Niepoprawne';
+
+        //create a select
+        var select2 = document.createElement('select');
+        select2.className = `form-control custom-select section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter}  question_${questionsCounter} questionActiveSelect`; // Add Bootstrap's custom-select class
+        select2.style.width = '200px';
+        select2.style.marginLeft = '10px'; // Add margin to the left
+
+        //create options
+        var select2option1 = document.createElement('option');
+        select2option1.value = 'Aktywne';
+        select2option1.text = 'Aktywne';
+
+        var select2option2 = document.createElement('option');
+        select2option2.value = 'Nieaktywne';
+        select2option2.text = 'Nieaktywne';
+
+        //add options to the select
+        select.appendChild(option1);
+        select.appendChild(option2);
+        select2.appendChild(select2option1);
+        select2.appendChild(select2option2);
+
+        //add label, input, and select to the QuestionsformInline
+        QuestionsformInline.appendChild(label);
+        QuestionsformInline.appendChild(input);
+        QuestionsformInline.appendChild(select);
+        QuestionsformInline.appendChild(select2);
+
+        //append the form inline to the new div
+        questions_div.appendChild(QuestionsformInline);
+
+        introduction_div.insertBefore(questions_div, addQuestionButton);
+    }
+
+    //create the first question
+    createQuestions();
+
+    addQuestionButton.addEventListener('click', function() {
+        createQuestions();
+    });
+
+    //I want to create here a checkbox here
+    // Create the checkbox
+    var checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.className = 'checkbox';
+    checkbox.style.width = '20px';
+    checkbox.style.height = '20px';
+    checkbox.style.marginLeft = '10px';
+    checkbox.style.marginBottom = '5px';
+    checkbox.style.marginRight = '5px';
+    //background color
+    checkbox.style.backgroundColor = 'black';
+
+    //add label to the checkbox
+    var label = document.createElement('label');
+    label.textContent = 'Dodaj omówienie';
+    label.style.color = 'white';
+    label.style.marginLeft = '5px';
+
+    // Create a container div
+    var container = document.createElement('div');
+
+    // Apply flexbox to the container
+    container.style.display = 'flex';
+    container.style.alignItems = 'center'; // This will vertically center the checkbox and label
+    //margin top
+    container.style.marginTop = '10px';
+
+    // Append the checkbox and label to the container
+    container.appendChild(checkbox);
+    container.appendChild(label);
+
+    var StingClass = `btn btn-secondary bottom-button section_${divCounter} ` + `lesson_${lessonCounter} ` + `task_${taskCounterInt} createTaskButton`;
+
+    //get reference to the bottom button
+    var dqwdwq = document.querySelector(`.${StingClass}`);
+
+    // Declare newIntroductionDiv outside of the event listener
+    var newIntroductionDiv;
+
+    // Add event listener to the checkbox
+    checkbox.addEventListener('change', function() {
+        if (this.checked) {
+            // Create a new introduction div
+            newIntroductionDiv = document.createElement('div');
+            newIntroductionDiv.className = `section_${divCounter}  lesson_${lessonCounter} task_${taskCounterInt}  introduction description`;
+            newIntroductionDiv.style.display = 'none'; // Initially hide the div
+            //padding right
+            //padding
+            newIntroductionDiv.style.padding = '10px';
+            newIntroductionDiv.style.paddingRight = '20px';
+
+
+            // Create a label for the input
+            var label = document.createElement('label');
+            label.textContent = 'Tytuł:';
+            label.className = 'label';
+            //text bold
+            label.style.fontWeight = 'bold';
+            //display none
+            label.style.display = 'none';
+
+            // Create the input
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} form-control mr-2 IntroductionInput Intr`; // margin right for spacing
+            input.placeholder = 'Wpisz np. wprowadzenie, zaznacz wszystkie prawiłowe odpowiedzi,omówienie itp';
+            //margin
+            input.style.margin = '10px';
+
+
+            //make the label and the iptut not editable
+            input.disabled = true;
+            //I want to hide the input
+            input.style.display = 'none';
+
+
+
+            // Create a label for the textarea
+            var textareaLabel = document.createElement('label');
+            textareaLabel.textContent = 'Opis:';
+            textareaLabel.className = 'label';
+            //text bold
+            textareaLabel.style.fontWeight = 'bold';
+            //margin right
+
+
+            // Create the textarea
+            var textarea = document.createElement('textarea');
+            textarea.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} form-control mr-2 DescriptionInput Treat`;
+            textarea.placeholder = 'Opis do filmu';
+            textarea.style.margin = '10px';
+            //margin righr
+            textarea.style.marginRight = '10px';
+            //text bold 
+
+
+
+            // Create a label for the file input
+            var fileInputLabel = document.createElement('label');
+            fileInputLabel.textContent = 'Wstaw film:';
+            fileInputLabel.className = 'label';
+            //text bold
+            fileInputLabel.style.fontWeight = 'bold';
+
+            // Create the file input
+            var fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.id = 'file';
+            fileInput.className = `section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} form-control mr-2 IntroductionInputFile Treat`;
+            fileInput.accept = 'video/*, image/*';
+            fileInput.placeholder = 'Upload a film or image here';
+            fileInput.style.margin = '10px';
+
+            // Append the label and input to the newIntroductionDiv
+            newIntroductionDiv.appendChild(label);
+            newIntroductionDiv.appendChild(input);
+
+            // Append the label and textarea to the newIntroductionDiv
+            newIntroductionDiv.appendChild(textareaLabel);
+            newIntroductionDiv.appendChild(textarea);
+
+            // Attach input event listener for description
+            textarea.addEventListener('input', function() {
+                if (this.value !== '') {
+                    this.style.border = '';
+                    this.classList.remove('empty-input'); // Remove class
+                }
+            });
+
+            // Attach input event listener for inputfile
+            fileInput.addEventListener('input', function() {
+                if (this.value !== '') {
+                    this.style.border = '';
+                    this.classList.remove('empty-input'); // Remove class
+                }
+            });
+
+
+
+            // Append the label and file input to the newIntroductionDiv
+            newIntroductionDiv.appendChild(fileInputLabel);
+            newIntroductionDiv.appendChild(fileInput);
+
+            //I want to add questions here in the same way like in the previous function but just the question div without the checkbox and without the button but in the current div
+            // Create the button
+            var button = document.createElement('button');
+            button.textContent = 'Usuń pytanie'; // Set the button text
+            button.className = 'btn btn-danger btn-sm'; // Add Bootstrap's button classes
+            button.style.position = 'absolute'; // Make the button absolute
+            button.style.top = '5px'; // Set the top position to 5px
+            button.style.right = '5px'; // Set the right position to 5px
+
+            // Create the Bootstrap form group with inline form
+            var QuestionsformInline2 = document.createElement('div');
+            //make ther 
+
+            // Create the label
+            var label = document.createElement('label');
+            label.textContent = 'Pytanie: ';
+            label.className = 'label form-control-label mr-2 question-number'; // Add margin to the right and the question-number
+
+            QuestionsformInline2.className = 'form-inline'; // Add Bootstrap's form-inline class
+
+            // Create the input
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.className = `form-control mr-2 section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter} question_${questionsCounter} questionInput`; // Add Bootstrap's form-control class and margin to the right
+            //maje tghem not editable
+            input.disabled = true;
+
+
+            // Create the select
+            var select = document.createElement('select');
+            select.className = `form-control custom-select section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter}  question_${questionsCounter} questionCorrectSelect`; // Add Bootstrap's custom-select class
+            select.style.width = '200px';
+            select.style.marginLeft = '10px'; // Add margin to the left
+            //make them not editable
+            select.disabled = true;
+
+            // Create the options
+            var option1 = document.createElement('option');
+            option1.value = 'Poprawne';
+            option1.text = 'Poprawne';
+
+            var option2 = document.createElement('option');
+            option2.value = 'Niepoprawne';
+            option2.text = 'Niepoprawne';
+
+            // Create the select
+            var select2 = document.createElement('select');
+            select2.className = `form-control custom-select section_${divCounter} lesson_${lessonCounter} task_${taskCounterInt} introduction_${Intoduction_couter}  question_${questionsCounter} questionActiveSelect`; // Add Bootstrap's custom-select class
+            select2.style.width = '200px';
+            select2.style.marginLeft = '10px'; // Add margin to the left
+            //make them not editable
+            select2.disabled = true;
+
+            // Create the options
+            var select2option1 = document.createElement('option');
+            select2option1.value = 'Aktywne';
+            select2option1.text = 'Aktywne';
+
+            var select2option2 = document.createElement('option');
+            select2option2.value = 'Nieaktywne';
+            select2option2.text = 'Nieaktywne';
+
+            // Add the options to the select
+            select.appendChild(option1);
+            select.appendChild(option2);
+            select2.appendChild(select2option1);
+            select2.appendChild(select2option2);
+
+            // Add the label, input, and select to the QuestionsformInline
+            QuestionsformInline2.appendChild(label);
+            QuestionsformInline2.appendChild(input);
+            QuestionsformInline2.appendChild(select);
+            QuestionsformInline2.appendChild(select2);
+
+            // Append the form inline to the new div
+            newIntroductionDiv.appendChild(QuestionsformInline2);
+
+
+            // I want the QuestionsformInline2 not active
+            QuestionsformInline2.style.display = 'none';
+
+            // Append the newIntroductionDiv to the introduction_div
+            introduction_div.appendChild(newIntroductionDiv);
+            newIntroductionDiv.style.display = 'block';
+            introduction_div.parentNode.insertBefore(newIntroductionDiv, bottomButtonIntroduction);
+        } else {
+            // Hide and remove the new introduction div
+            if (newIntroductionDiv) {
+                newIntroductionDiv.style.display = 'none';
+                if (newIntroductionDiv.parentNode) {
+                    newIntroductionDiv.parentNode.removeChild(newIntroductionDiv);
+                }
+            }
+        }
+    });
+
+    // Append the container to the introduction_div
+    introduction_div.appendChild(container);
+
+
+
+
+}
+createIntroduction();
+
+bottomButtonIntroduction.addEventListener('click', function() {
+    createIntroduction();
+});
+  }
+
+  createTasks();
+
+  bottomButtonTask.addEventListener('click', function() {
+    console.log('Create Task button clicked'); // Debug log
+    createTasks();
+  });
+}
+
+
+//get the removeTask button and alert
+document.querySelectorAll('.removeLesson').forEach(function(button) {
+  button.addEventListener('click', function() {
+    // Find the parent lesson div
+    var lesson_div = button.closest('.lesson');
+    
+    // Remove the lesson div
+    if (lesson_div) {
+      lesson_div.parentNode.removeChild(lesson_div);
+      lessonCounter--;
+      
+      // Renumerate the lessons
+      renumerateLessons();
+    }
+  });
+});
+
+
+
+
+//get element by class name createLessonButton and add event listener
+document.querySelectorAll('.createLessonButton').forEach(function(button) {
+  button.addEventListener('click', function() {
+    createLesson();
+  });
+});
+
+function renumerateLessons() {
+  // Get all lessons
+  var lessons = document.querySelectorAll('.lesson');
+  
+  // Iterate over each lesson and update the lesson number
+  lessons.forEach((lesson, index) => {
+    // Calculate the new lesson number
+    var newLessonNumber = index + 1;
+
+    // Find the corresponding lesson_numbers element within the lesson
+    var lessonCaption = lesson.querySelector('.lesson_numbers');
+    
+    // Update the text content of the lesson_numbers element
+    if (lessonCaption) {
+      lessonCaption.textContent = 'Lekcja: ' + newLessonNumber;
+    }
+    
+    // Update the lesson attribute of the lesson itself
+    lesson.setAttribute('lesson', newLessonNumber);
+    
+    // Find all nested elements with the lesson attribute and update them
+    var nestedElements = lesson.querySelectorAll('[lesson], [lesson_number], [class*="lesson_"]');
+    nestedElements.forEach(nestedElement => {
+      // Update the lesson attribute
+      if (nestedElement.hasAttribute('lesson')) {
+        nestedElement.setAttribute('lesson', newLessonNumber);
+      }
+      
+      // Update the lesson_number attribute
+      if (nestedElement.hasAttribute('lesson_number')) {
+        nestedElement.setAttribute('lesson_number', newLessonNumber);
+      }
+      
+      // Update the class name that includes lesson_X
+      var classList = nestedElement.className.split(' ');
+      classList = classList.map(className => {
+        if (className.startsWith('lesson_')) {
+          return 'lesson_' + newLessonNumber;
+        }
+        return className;
+      });
+      nestedElement.className = classList.join(' ');
+    });
+  });
+}
+
+function renumerateTasks(parentLesson) {
+    var tasks = parentLesson.querySelectorAll('.task');
+    var taskCounter = 64; // ASCII code for 'A'
+    tasks.forEach(function(task, index) {
+        taskCounter++;
+        var taskCaption = task.querySelector('.task-text');
+        taskCaption.textContent = "Zadanie " + String.fromCharCode(taskCounter);
+    });
+}
+
+function renumerateIntroduction(task) {
+     var introductions = task.getElementsByClassName('introduction-text');
+     for (var i = 0; i < introductions.length; i++) {
+         introductions[i].textContent = (i + 1);
+     }
+ }
+
+function renumerateQuestions(introduction) {
+     var questions = introduction.getElementsByClassName('question');
+     for (var i = 0; i < questions.length; i++) {
+         var questionNumber = questions[i].getElementsByClassName('question-number')[0]; // Get the specific element that contains the question number
+         questionNumber.textContent = 'Pytanie: ' + (i + 1);
+     }
+ }
+    
+ SendButton.addEventListener('click', function() {
+        this.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...';
+        this.disabled = true;
+        var inputs = document.querySelectorAll('.TitleSectionInput');
+        var allFilled = true;
+
+
+
+inputs.forEach(function(input, index) {
+         if (input.value === '') {
+             input.style.border = '1px solid red';
+             input.placeholder = 'Proszę uzupełnić tytuł działu przed wysłaniem danych';
+             input.classList.add('empty-input'); // Add class
+             allFilled = false;
+         }
+     });
+
+     //Do the same for authors
+     var authors = document.querySelectorAll('.AutorInput');
+     authors.forEach(function(input, index) {
+         if (input.value === '') {
+             input.style.border = '1px solid red';
+             input.placeholder = 'Proszę uzupełnić autora przed wysłaniem danych';
+             input.classList.add('empty-input'); // Add class
+             allFilled = false;
+         }
+     });
+
+          //Do the same for lessons
+          var lessons = document.querySelectorAll('.TitleLessonInput');
+     lessons.forEach(function(input, index) {
+         if (input.value === '') {
+             input.style.border = '1px solid red';
+             input.placeholder = 'Proszę uzupełnić tytuł lekcji przed wysłaniem danych';
+             input.classList.add('empty-input'); // Add class
+             allFilled = false;
+         }
+     });
+
+          //Do the same for tasks
+          var authors = document.querySelectorAll('.TaskInput');
+     authors.forEach(function(input, index) {
+         if (input.value === '') {
+             input.style.border = '1px solid red';
+             input.placeholder = 'Proszę uzupełnić treść zadania przed wysłaniem danych, np. co widzisz? co usłyszałeś? co opiszesz? itp';
+             input.classList.add('empty-input'); // Add class
+             allFilled = false;
+         }
+     });
+
+     //Do the same for introduction title
+     var authors = document.querySelectorAll('.IntroductionInput.Introd');
+     authors.forEach(function(input, index) {
+         if (input.value === '') {
+             input.style.border = '1px solid red';
+             input.placeholder = 'Proszę uzupełnić tytuł wprowadzenia przed wysłaniem danych np. wprowadzenie, zaznacz wszystkie prawiłowe odpowiedzi itp.';
+             input.classList.add('empty-input'); // Add class
+             allFilled = false;
+         }
+     });
+
+          //Do the same for question
+          var authors = document.querySelectorAll('.questionInput.Introd');
+     authors.forEach(function(input, index) {
+         if (input.value === '') {
+             input.style.border = '1px solid red';
+             input.placeholder = 'Proszę uzupełnić treść pytań przed wysłaniem danych';
+             input.classList.add('empty-input'); // Add class
+             allFilled = false;
+         }
+     });
+
+     //Do the same for description
+     var authors = document.querySelectorAll('.DescriptionInput.Treat');
+     authors.forEach(function(input, index) {
+         if (input.value === '') {
+             input.style.border = '1px solid red';
+             input.placeholder = 'Proszę uzupełnić opis do filmu w omówieniu przed wysłaniem danych';
+             input.classList.add('empty-input'); // Add class
+             allFilled = false;
+         }
+     });
+
+     //Do the same for introduction title
+     var authors = document.querySelectorAll('.IntroductionInputFile.Treat');
+     authors.forEach(function(input, index) {
+         if (input.value === '') {
+             input.style.border = '1px solid red';
+             input.placeholder = 'Proszę wstaw film do omówienia przed wysłaniem danych';
+             input.classList.add('empty-input'); // Add class
+             allFilled = false;
+         }
+     });
+
+     if (!allFilled) {
+         return;
+     }
+
+const sectionsData = [];
+const formData = new FormData(); // Assuming formData is defined somewhere
+
+// Get all sections
+var sections = document.querySelectorAll('.section');
+sections.forEach((section, i) => {
+    let title_of_section = section.querySelector('.TitleSectionInput')?.value;
+    let author_of_section = section.querySelector('.AutorInput')?.value;
+    let status_of_section = section.querySelector('.StatusSectionSelect')?.value; // New field
+    const lessons = [];
+
+    // Get all lessons in the section
+    var lessonElements = section.querySelectorAll('.lesson');
+    lessonElements.forEach((lesson, j) => {
+        let title_of_lesson = lesson.querySelector('.TitleLessonInput')?.value;
+        let status_of_lesson = lesson.querySelector('.StatusLessonSelect')?.value; // New field
+        const tasks = [];
+
+        // Get all tasks in the lesson
+        var taskElements = lesson.querySelectorAll('.task');
+        taskElements.forEach((task, k) => {
+            let title_of_task = task.querySelector('.TaskInput')?.value;
+            const introductions = [];
+            let helpQuestions = []; // Store questions from the help introduction
+
+            // Get all introductions in the task
+            var introductionElements = task.querySelectorAll('.introduction');
+            introductionElements.forEach((introduction, l) => {
+                let title_of_introduction, title_of_description, description, file, path_file;
+                const questions = [];
+
+                if (introduction.classList.contains('help')) {
+                    title_of_introduction = introduction.querySelector('.IntroductionInput.Introd')?.value;
+                    description = introduction.querySelector('.DescriptionInput.Introd')?.value;
+                    file = introduction.querySelector('.IntroductionInputFile.Introd')?.files[0];
+                    oldFilePath = introduction.querySelector('.currentFilmInIntroductionHelp')?.value;
+
+                    if (file) {
+                        const fileName = file.name.split('/').pop();
+                        formData.append(`video_film_${i}_${j}_${k}_${l}`, file);
+                        path_file = fileName;
+                    } else {
+                        const oldFileName = oldFilePath.split('/').pop();
+                        formData.append(`video_film_${i}_${j}_${k}_${l}`, oldFilePath);
+                        path_file = oldFileName;
+                    }
+
+                    var questionElements = introduction.querySelectorAll('.question');
+                    questionElements.forEach((questionElement, m) => {
+                        let question = questionElement.querySelector('.questionInput.Introd')?.value;
+                        let correct = questionElement.querySelector('.questionCorrectSelect')?.value;
+                        let active = questionElement.querySelector('.questionActiveSelect')?.value;
+                        correct = (correct === 'true' || correct === 'Poprawne') ? "Poprawne" : "Niepoprawne";
+                        active = (active === 'true' || active === "Aktywne") ? "Aktywne" : "Nieaktywne";
+                        questions.push({ question, correct, active });
+                    });
+
+                    helpQuestions = questions; // Store questions from help introduction
+                    introductions.push({ title_of_introduction, description, path_file, questions });
+                }
+
+                if (introduction.classList.contains('description')) {
+                    title_of_description = "description";
+                    description = introduction.querySelector('.DescriptionInput')?.value;
+                    file = introduction.querySelector('.IntroductionInputFile')?.files[0];
+
+                    if (file) {
+                        formData.append(`video_film_${i}_${j}_${k}_${l}`, file);
+                        path_file = file.name;
+                    } else {
+                        // Use the current film if no new file is uploaded
+                        const currentFilmPath = introduction.querySelector('.currentFilmIntroductionDescription')?.value;
+                        path_file = currentFilmPath.split('/').pop(); // Extract the file name
+                    }
+
+                    introductions.push({ title_of_description, description, path_file, questions: helpQuestions });
+                }
+            });
+
+            tasks.push({ title_of_task, introductions });
+        });
+
+        lessons.push({ title_of_lesson, status_of_lesson, tasks }); // Include status_of_lesson
+    });
+
+    sectionsData.push({ title_of_section, author_of_section, status_of_section, lessons }); // Include status_of_section
+});
+formData.append('sections', JSON.stringify(sectionsData));
+    
+    fetch('/admin/edit/section/' + divCounter_section , {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => {
+      if (response.headers.get('content-type').includes('application/json')) {
+        return response.json();
+      } else {
+        return response.text().then(text => {
+          throw new Error(`Expected JSON, got ${text}`);
+        });
+      }
+    })
+    .then(data => {
+      //redirect to the edit page
+      window.location.href = '/admin/edit';
+    })
+    .catch((error) => {
+      console.error(error);
+      alert('An error occurred while saving the data. Please try again. If the problem persists, please contact the administrator.')
+    });
+});
+</script>

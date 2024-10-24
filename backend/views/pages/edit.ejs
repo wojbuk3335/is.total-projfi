@@ -1,0 +1,28 @@
+<div class="page-container">
+    <h3 class="header_edit_section">Edytuj działy</h3>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>LP</th>
+                <th>Tytuł działu</th>
+                <th>Autor</th>
+                <th class="text-right">Akcje</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% let lp = 1; %>
+            <% sections.forEach(section => { %>
+                <tr class="grey-background">
+                    <td style="margin-top: 10ox; padding-top: 15px;"><b><%= lp++ %></b></td>
+                    <td style="margin-top: 10ox; padding-top: 15px;"><b><%= section.title_of_section %></b></td>
+                    <td style="margin-top: 10ox; padding-top: 15px;"><b><%= section.author_of_section %></b></td>
+                    <td class="text-right">
+                        <a href="/admin/edit/section/<%= section._id %>" class="btn btn-primary edit">Edytuj</a>
+                        <a href="/admin/delete/<%= section._id %>" class="btn btn-danger delete">Usuń</a>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,38 @@
+<div class="login-form">
+<div class="cont">
+  <img src="/img/is_logo.png" alt="">
+<form method="POST">
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" 
+        class="form-control" 
+        name="email" 
+        value="<%- form.email %>"
+        id="email"
+        required>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Hasło</label>
+      <input type="password" 
+        class="form-control" 
+        name="password"
+        id="password"
+        required>
+    </div>
+    <div style="display: flex; align-items: center;">
+      <!-- <input type="checkbox" class="form-check-input" id="rememberMe" style="margin-right: 5px" name="rememberMe">
+      <label class="form-check-label" for="rememberMe">Zapamiętaj</label> -->
+      <!-- <a style="margin-left: 15px" href="/forgot-password">Zapomniałeś hasła?</a> -->
+      <a href="/forgetPassword" style="margin-left: 5px; cursor: pointer;">Resetuj hasło</a>
+      
+    </div>
+
+    <% if (errors) { %>
+      <div class="alert alert-danger">Błędny email/hasło</div>
+    <% } %>
+
+    <button class="btn btn-primary">Zaloguj!</button>
+  </form>
+</div>
+</div>
