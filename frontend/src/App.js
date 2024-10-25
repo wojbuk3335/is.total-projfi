@@ -1,24 +1,28 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
+import MainPage from './components/MainPage';
+import Lessons from './components/Lessons';
 
 function App() {
+  const [sections, setSections] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3001/api/sections')
+      .then(response => response.json())
+      .then(data => setSections(data))
+      .catch(error => console.error('Error fetching sections:', error));
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<MainPage sections={sections} />} />
+          <Route path="/sections/:sectionId/lessons" element={<Lessons sections={sections} />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
