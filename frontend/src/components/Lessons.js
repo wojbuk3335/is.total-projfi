@@ -17,7 +17,7 @@ function Lessons({ sections }) {
     }, [sections, sectionId]);
 
     const handleClick = (lessonIndex) => {
-        navigate(`/sections/${sectionId}/lessons/${lessonIndex+1}`);
+        navigate(`/sections/${sectionId}/lessons/${lessonIndex+1}/tasks/1/introductions/1`);
     };
 
     return (

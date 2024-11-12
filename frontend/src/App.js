@@ -15,13 +15,27 @@ function App() {
       .catch(error => console.error('Error fetching sections:', error));
   }, []);
 
+  const updateQuestionState = (sectionId, lessonId, taskId, introductionsId, questionIndex) => {
+    const sectionIndex = parseInt(sectionId, 10) - 1;
+    const lessonIndex = parseInt(lessonId, 10) - 1;
+    const taskIndex = parseInt(taskId, 10) - 1;
+    const introductionIndex = parseInt(introductionsId, 10) - 1;
+
+    const updatedSections = [...sections];
+    const question = updatedSections[sectionIndex].lessons[lessonIndex].tasks[taskIndex].introductions[introductionIndex].questions[questionIndex];
+    question.checked = !question.checked;
+
+    setSections(updatedSections);
+  };
+
   return (
     <Router>
       <div className="App">
         <Routes>
           <Route path="/" element={<MainPage sections={sections} />} />
-          <Route path="/sections/:sectionId/lessons" element={<Lessons sections={sections} state={sections}/>} />
-          <Route path="/sections/:sectionId/lessons/:lessonId" element={<Task sections={sections} />} />
+          <Route path="/sections/:sectionId/lessons" element={<Lessons sections={sections} />} />
+          <Route path="/sections/:sectionId/lessons/:lessonId/" element={<Task sections={sections} updateQuestionState={updateQuestionState} />} />
+          <Route path="/sections/:sectionId/lessons/:lessonId/tasks/:taskId/introductions/:introductionsId" element={<Task sections={sections} updateQuestionState={updateQuestionState} />} />
           <Route path="*" element={<h1>Not Found</h1>} />
         </Routes>
       </div>
