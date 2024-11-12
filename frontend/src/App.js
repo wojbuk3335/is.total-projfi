@@ -22,6 +22,7 @@ function App() {
           <Route path="/" element={<MainPage sections={sections} />} />
           <Route path="/sections/:sectionId/lessons" element={<Lessons sections={sections} state={sections}/>} />
           <Route path="/sections/:sectionId/lessons/:lessonId" element={<Task sections={sections} />} />
+          <Route path="*" element={<h1>Not Found</h1>} />
         </Routes>
       </div>
     </Router>
