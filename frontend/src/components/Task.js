@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-<<<<<<< HEAD
 function Task({ sections, updateQuestionState }) {
-=======
-function Task({ sections }) {
->>>>>>> 64e8c7da346b41aa2052e6cf0c5e4a12c7fcb7fb
     const navigate = useNavigate();
     const { sectionId, lessonId, taskId, introductionsId } = useParams();
     const [lessons, setLessons] = useState([]);
@@ -14,11 +10,7 @@ function Task({ sections }) {
     const [currentTasks, setCurrentTasks] = useState([]);
     const [currentTaskTitle, setCurrentTaskTitle] = useState('');
     const [currentIntroduction, setCurrentIntroduction] = useState(null);
-<<<<<<< HEAD
     const [previousIntroduction, setPreviousIntroduction] = useState(null);
-=======
-    const [selectedQuestions, setSelectedQuestions] = useState({});
->>>>>>> 64e8c7da346b41aa2052e6cf0c5e4a12c7fcb7fb
 
     useEffect(() => {
         console.log('Sections:', sections);
@@ -47,7 +39,6 @@ function Task({ sections }) {
                 const introduction = sections[sectionIndex].lessons[lessonIndex].tasks[taskIndex].introductions[introductionIndex];
                 setCurrentIntroduction(introduction);
                 console.log('Current Introduction Path File:', introduction.path_file);
-<<<<<<< HEAD
 
                 // Set previous introduction if available
                 if (introductionIndex > 0) {
@@ -56,25 +47,12 @@ function Task({ sections }) {
                 } else {
                     setPreviousIntroduction(null);
                 }
-=======
->>>>>>> 64e8c7da346b41aa2052e6cf0c5e4a12c7fcb7fb
             }
         }
     }, [sections, sectionId, lessonId, taskId, introductionsId]);
 
     const handleClick = (index) => {
-<<<<<<< HEAD
         updateQuestionState(sectionId, lessonId, taskId, introductionsId, index);
-=======
-        setSelectedQuestions(prevState => ({
-            ...prevState,
-            [index]: !prevState[index]
-        }));
-    };
-
-    const handleNextClick = () => {
-        alert('Next button clicked');
->>>>>>> 64e8c7da346b41aa2052e6cf0c5e4a12c7fcb7fb
     };
 
     const handleNextClick = () => {
@@ -122,11 +100,7 @@ function Task({ sections }) {
                             </div>
                             <div style={{ display: 'flex', gap: '5px' }}>
                                 {currentTasks.map((task, index) => (
-<<<<<<< HEAD
-                                    <div key={index} style={{ fontSize: '35px', fontWeight: 'normal', padding: '0px 15px', background: index === currentTaskIndex ? 'rgb(255, 255, 255)' : 'rgb(119, 134, 142)', borderRadius: '5px', color: '#3F4E55' }}>
-=======
                                     <div key={index} style={{ fontSize: '35px', fontWeight: 'normal', padding: '0px 15px', background: 'rgb(255, 255, 255)', borderRadius: '5px', color: '#3F4E55' }}>
->>>>>>> 64e8c7da346b41aa2052e6cf0c5e4a12c7fcb7fb
                                         {String.fromCharCode(65 + index)}
                                     </div>
                                 ))}
@@ -143,17 +117,12 @@ function Task({ sections }) {
                         )}
                     </div>
                     <div style={{ display: "block", backgroundColor: '#3F4E55', color: 'white', fontSize: '18px' }}>
-<<<<<<< HEAD
                         {currentIntroduction ? currentIntroduction.description : ''}
-=======
-                        colordqw dk qwj oidqwjoi dqwjdoi qwjdoiqwjoidqwj doiqwj doiqwjdoiqwj doij wqdoijd qwdjokp qwopd qwjoi dqwoj idqwjdoijqwdoi jqwoi qwdoi qwjdoi qwjdoiwwjdoi
->>>>>>> 64e8c7da346b41aa2052e6cf0c5e4a12c7fcb7fb
                     </div>
                 </div>
             </div>
             <div className="right" style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 <div style={{ flex: 8, backgroundColor: '#3F4E55', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', fontSize: '25px', paddingLeft: '0px' }}>
-<<<<<<< HEAD
                     <div style={{ display: "block" }}>
                         {currentTaskTitle}
                     </div>
@@ -176,35 +145,6 @@ function Task({ sections }) {
                                 </div>
                             ))
                         )}
-=======
-                    <div style={{ display: "block"}}>
-                        {currentTaskTitle}
-                    </div>
-                    <div style={{ display: "block", fontSize: '18px', marginTop: '10px', color: '#b7c84c' }}>
-                        {currentIntroduction ? currentIntroduction.title_of_introduction : ''}
-                    </div>
-                    <div style={{ display: "block", fontSize: '18px', marginTop: '10px' }}>
-                        {currentIntroduction ? currentIntroduction.questions.map((question, index) => (
-                            <div
-                                key={index}
-                                onClick={() => handleClick(index)}
-                                style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    marginBottom: '15px',
-                                    cursor: 'pointer',
-                                    color: selectedQuestions[index] ? 'yellow' : 'white'
-                                }}
-                            >
-                                <div style={{ backgroundColor: 'rgb(149, 162, 170)', padding: '2px 10px', marginRight: '10px', borderRadius: '0px 5px 5px 0px', fontWeight: 'bold' }}>
-                                    <span>{index + 1}</span>
-                                </div>
-                                <div>
-                                    {question.question}
-                                </div>
-                            </div>
-                        )) : ''}
->>>>>>> 64e8c7da346b41aa2052e6cf0c5e4a12c7fcb7fb
                     </div>
                 </div>
                 <div style={{ flex: 2, backgroundColor: '#3F4E55', display: 'flex', justifyContent: 'flex-end', alignItems: 'center', paddingRight: '0px' }}>

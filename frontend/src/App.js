@@ -4,6 +4,7 @@ import './App.css';
 import MainPage from './components/MainPage';
 import Lessons from './components/Lessons';
 import Task from './components/Task';
+import Summary from './components/Summary';
 
 function App() {
   const [sections, setSections] = useState([]);
@@ -33,15 +34,10 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<MainPage sections={sections} />} />
-<<<<<<< HEAD
           <Route path="/sections/:sectionId/lessons" element={<Lessons sections={sections} />} />
           <Route path="/sections/:sectionId/lessons/:lessonId/" element={<Task sections={sections} updateQuestionState={updateQuestionState} />} />
           <Route path="/sections/:sectionId/lessons/:lessonId/tasks/:taskId/introductions/:introductionsId" element={<Task sections={sections} updateQuestionState={updateQuestionState} />} />
-=======
-          <Route path="/sections/:sectionId/lessons" element={<Lessons sections={sections} state={sections}/>} />
-          <Route path="/sections/:sectionId/lessons/:lessonId/" element={<Task sections={sections} />} />
-          <Route path="/sections/:sectionId/lessons/:lessonId/tasks/:taskId/introductions/:introductionsId" element={<Task sections={sections} />} />
->>>>>>> 64e8c7da346b41aa2052e6cf0c5e4a12c7fcb7fb
+          <Route path="/sections/:sectionId/lessons/:lessonId/summary" element={<Summary sections={sections} />} />
           <Route path="*" element={<h1>Not Found</h1>} />
         </Routes>
       </div>
