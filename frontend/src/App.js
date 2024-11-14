@@ -5,6 +5,7 @@ import MainPage from './components/MainPage';
 import Lessons from './components/Lessons';
 import Task from './components/Task';
 import Summary from './components/Summary';
+import HowToUse from './components/HowToUse';
 
 function App() {
   const [sections, setSections] = useState([]);
@@ -34,6 +35,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<MainPage sections={sections} />} />
+          <Route path="/how-to-use" element={<HowToUse />} />
           <Route path="/sections/:sectionId/lessons" element={<Lessons sections={sections} />} />
           <Route path="/sections/:sectionId/lessons/:lessonId/" element={<Task sections={sections} updateQuestionState={updateQuestionState} />} />
           <Route path="/sections/:sectionId/lessons/:lessonId/tasks/:taskId/introductions/:introductionsId" element={<Task sections={sections} updateQuestionState={updateQuestionState} />} />

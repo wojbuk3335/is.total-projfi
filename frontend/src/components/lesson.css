@@ -1,0 +1,59 @@
+.section_title {
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 800px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .left, .right {
+        width: 100%;
+    }
+
+    .right {
+        flex-direction: column;
+    }
+
+    .left img {
+        width: 50%; /* Adjust the percentage as needed */
+    }
+    
+    .prawa_szpalta{
+        font-size: 10px;
+    }
+
+    .how_use_font{
+        font-size: 15px;
+        color: #fff;
+        margin-bottom: 20px;
+    }
+
+    .how_use_img{
+        width: 25px;
+        margin-bottom: 20px;
+    }
+}
+.scrollable-list {
+    max-height: 50vh; /* Adjust the height as needed */
+    overflow-y: auto;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.title_of_lesson {
+    font-size: 14px;
+    color: #fff;
+    background-color: #95A2AA;
+    font-weight: bold;
+    display: inline-block;
+    padding: 5px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transition: background-color 0.3s;
+}
+
+.title_of_lesson:hover {
+    background-color: #7A8A94;
+}

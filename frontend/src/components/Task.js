@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import './Task.css'; // Import the CSS file
 
 function Task({ sections, updateQuestionState }) {
     const navigate = useNavigate();
@@ -81,42 +82,32 @@ function Task({ sections, updateQuestionState }) {
     return (
         <div className="container">
             <div className="left">
-                <div style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    backgroundColor: '#f0f0f0',
-                    maxWidth: '100%',
-                    maxWidth: '800px'
-                }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", width: "100%", backgroundColor: '#3F4E55', color: 'white', fontSize: '25px', fontWeight: 'bold', paddingBottom: '20px' }}>
+                <div className="content-container">
+                    <div className="header">
                         <div>
                             {sectionTitle}
                         </div>
-                        <div style={{ display: "flex", alignItems: 'center' }}>
-                            <div style={{ marginRight: '15px' }}>
+                        <div className="lesson-info">
+                            <div className="lesson-title">
                                 {currentLessonTitle}
                             </div>
-                            <div style={{ display: 'flex', gap: '5px' }}>
+                            <div className="tasks">
                                 {currentTasks.map((task, index) => (
-                                    <div key={index} style={{ fontSize: '35px', fontWeight: 'normal', padding: '0px 15px', background: 'rgb(255, 255, 255)', borderRadius: '5px', color: '#3F4E55' }}>
+                                    <div key={index} className={`task ${currentTaskIndex === index ? 'active' : ''}`}>
                                         {String.fromCharCode(65 + index)}
                                     </div>
                                 ))}
                             </div>
                         </div>
                     </div>
-                    <div style={{ display: "block" }}>
                         {currentIntroduction ? (
-                            <video controls src={`http://localhost:3001${currentIntroduction.path_file}`} style={{ width: '100%', height: 'auto' }}>
+                            <video class="video"controls src={`http://localhost:3001${currentIntroduction.path_file}`}>
                                 <source src={`http://localhost:3001${currentIntroduction.path_file}`} type="video/mp4" />
                             </video>
                         ) : (
                             'backgroundColor'
                         )}
-                    </div>
-                    <div style={{ display: "block", backgroundColor: '#3F4E55', color: 'white', fontSize: '18px' }}>
+                    <div className="scrollable-content" style={{ display: "block", backgroundColor: '#3F4E55', color: 'white', fontSize: '18px' }}>
                         {currentIntroduction ? currentIntroduction.description : ''}
                     </div>
                 </div>
@@ -132,17 +123,23 @@ function Task({ sections, updateQuestionState }) {
                     <div style={{ display: "block", fontSize: '18px', marginTop: '10px' }}>
                         {currentIntroduction && currentIntroduction.title_of_description && previousIntroduction && previousIntroduction.questions ? (
                             previousIntroduction.questions.map((question, index) => (
-                                <div key={index} style={{ marginBottom: '10px', color: question.checked ? 'yellow' : 'white', cursor: 'pointer' }}>
-                                    <span style={{ marginRight: '8px', padding: '5px', backgroundColor: question.correct === 'Poprawne' ? 'yellow' : 'rgb(149, 162, 170)', borderTopRightRadius: '5px', borderBottomRightRadius: '5px' }}>{index + 1}.</span>
-                                    <label style={{ cursor: 'pointer' }}>{question.question}</label>
-                                </div>
+<div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', color: question.checked ? 'yellow' : 'white', cursor: 'pointer' }}>
+    <img src={question.correct === 'Poprawne' ? '/img/Odpowiedź_przycisk_żółty-1.png' : '/img/Odpowiedź_przycisk_szary-1.png'} style={{ display: 'inline-block' }} />
+    <span style={{ display: 'flex', alignItems: 'center', marginLeft: '-30px', marginRight: '8px', padding: '5px', backgroundSize: 'cover', borderTopRightRadius: '5px', borderBottomRightRadius: '5px' }}>
+        <b><span style={{ paddingRight: '20px' }}>{index + 1}</span></b>
+        {question.question}
+    </span>
+</div>
                             ))
                         ) : (
                             currentIntroduction && currentIntroduction.questions && currentIntroduction.questions.map((question, index) => (
-                                <div key={index} style={{ marginBottom: '10px', color: question.checked ? 'yellow' : 'white', cursor: 'pointer' }} onClick={() => handleClick(index)}>
-                                    <span style={{ marginRight: '8px', padding: '5px', backgroundColor: 'rgb(149, 162, 170)', borderTopRightRadius: '5px', borderBottomRightRadius: '5px' }}>{index + 1}.</span>
-                                    <label style={{ cursor: 'pointer' }}>{question.question}</label>
-                                </div>
+                            <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', color: question.checked ? 'yellow' : 'white', cursor: 'pointer' }} onClick={() => handleClick(index)}>
+                            <img src="/img/Odpowiedź_przycisk_szary-1.png" style={{ display: 'inline-block' }}/>
+                            <span style={{ display: 'flex', alignItems: 'center', marginLeft:'-30px',marginRight: '8px', padding: '5px', backgroundSize: 'cover', borderTopRightRadius: '5px', borderBottomRightRadius: '5px' }}>
+                                <b><span style={{ paddingRight: '20px' }}>{index + 1}</span></b>
+                                {question.question}
+                            </span>
+                            </div>
                             ))
                         )}
                     </div>

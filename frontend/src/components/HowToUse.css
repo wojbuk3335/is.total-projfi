@@ -1,0 +1,31 @@
+.img-margin-right {
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.container {
+    width: 100%;
+}
+
+@media (max-width: 800px) {
+    .text_how_to_use {
+        width: 95%;
+        margin: 0 auto;
+    }
+}
+
+.how_use_container {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .how_use_container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .how_use_img {
+        margin-bottom: 2px; /* Adjust as needed */
+    }
+}
