@@ -1,0 +1,76 @@
+.section-title {
+    color: white;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.centered-list {
+    text-align: center;
+    list-style-type: none;
+    padding: 0;
+}
+
+.centered-list li {
+    display: block;
+    margin: 10px 0;
+}
+
+.summary-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #3F4E55; /* Adjust as needed */
+    color: white; /* Ensure text is readable on the background */
+}
+
+.summary-content {
+    flex: 0 0 65vh;
+    overflow-y: auto;
+}
+
+.summary-footer {
+    flex: 0 0 20vh;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding-left: 20px; /* Adjust as needed */
+}
+
+.summary-footer div {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.summary-footer img {
+    margin-right: 10px;
+}
+
+.summary-footer p {
+    margin: 0;
+}
+
+.summary-next {
+    flex: 0 0 15vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 0px;
+}
+
+.centered-list {
+    display: flex;
+    justify-content: center;
+}
+
+.lessons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjust the min-width as needed */
+    gap: 20px; /* Adjust the gap as needed */
+}
+
+.lesson {
+    display: block;
+}

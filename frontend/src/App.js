@@ -8,14 +8,23 @@ import Summary from './components/Summary';
 import HowToUse from './components/HowToUse';
 
 function App() {
-  const [sections, setSections] = useState([]);
+  const [sections, setSections] = useState(() => {
+    const savedSections = localStorage.getItem('sections');
+    return savedSections ? JSON.parse(savedSections) : [];
+  });
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/sections')
-      .then(response => response.json())
-      .then(data => setSections(data))
-      .catch(error => console.error('Error fetching sections:', error));
+    if (sections.length === 0) {
+      fetch('http://localhost:3001/api/sections')
+        .then(response => response.json())
+        .then(data => setSections(data))
+        .catch(error => console.error('Error fetching sections:', error));
+    }
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('sections', JSON.stringify(sections));
+  }, [sections]);
 
   const updateQuestionState = (sectionId, lessonId, taskId, introductionsId, questionIndex) => {
     const sectionIndex = parseInt(sectionId, 10) - 1;
@@ -39,7 +48,7 @@ function App() {
           <Route path="/sections/:sectionId/lessons" element={<Lessons sections={sections} />} />
           <Route path="/sections/:sectionId/lessons/:lessonId/" element={<Task sections={sections} updateQuestionState={updateQuestionState} />} />
           <Route path="/sections/:sectionId/lessons/:lessonId/tasks/:taskId/introductions/:introductionsId" element={<Task sections={sections} updateQuestionState={updateQuestionState} />} />
-          <Route path="/sections/:sectionId/lessons/:lessonId/summary" element={<Summary sections={sections} />} />
+          <Route path="/sections/:sectionId/summary" element={<Summary sections={sections} />} />
           <Route path="*" element={<h1>Not Found</h1>} />
         </Routes>
       </div>

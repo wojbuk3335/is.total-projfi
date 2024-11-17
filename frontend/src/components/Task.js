@@ -72,7 +72,7 @@ function Task({ sections, updateQuestionState }) {
             if (sections[sectionIndex].lessons[lessonIndex].tasks[nextTaskIndex]) {
                 navigate(`/sections/${sectionId}/lessons/${lessonId}/tasks/${nextTaskIndex + 1}/introductions/1`);
             } else {
-                alert('No more tasks or introductions available.');
+                navigate(`/sections/${sectionId}/summary`);
             }
         }
     };
