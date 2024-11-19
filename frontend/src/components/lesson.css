@@ -5,7 +5,7 @@
 }
 
 @media (max-width: 800px) {
-    .container {
+    .container_first_page {
         flex-direction: column;
     }
 

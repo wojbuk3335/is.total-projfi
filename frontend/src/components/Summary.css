@@ -74,3 +74,31 @@
 .lesson {
     display: block;
 }
+
+.lesson-container {
+    display: flex;
+    align-items: center; /* Center vertically */
+    margin-bottom: 20px; /* Add some space between lessons */
+}
+
+.lesson {
+    margin-right: 20px; /* Adjust the spacing between the table and the button */
+}
+
+.button-container {
+    display: flex;
+    align-items: center; /* Center vertically */
+}
+
+.xxxx{
+    background-color: #BFC500; /* Adjust as needed */
+    color: white; /* Ensure text is readable on the background */
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}

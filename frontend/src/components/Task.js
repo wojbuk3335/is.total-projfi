@@ -80,7 +80,7 @@ function Task({ sections, updateQuestionState }) {
     const currentTaskIndex = parseInt(taskId, 10) - 1;
 
     return (
-        <div className="container">
+        <div className="container_first_page">
             <div className="left">
                 <div className="content-container">
                     <div className="header">
@@ -100,13 +100,14 @@ function Task({ sections, updateQuestionState }) {
                             </div>
                         </div>
                     </div>
-                        {currentIntroduction ? (
-                            <video class="video"controls src={`http://localhost:3001${currentIntroduction.path_file}`}>
-                                <source src={`http://localhost:3001${currentIntroduction.path_file}`} type="video/mp4" />
-                            </video>
-                        ) : (
-                            'backgroundColor'
-                        )}
+                    {currentIntroduction ? (
+                        <video class="video" controls autoplay src={`${currentIntroduction.path_file}`}>
+                            <source src={`${currentIntroduction.path_file}`} type="video/mp4" />
+                        </video>
+                        //<source src={`http://localhost:3001${currentIntroduction.path_file}`} type="video/mp4" />
+                    ) : (
+                        'backgroundColor'
+                    )}
                     <div className="scrollable-content" style={{ display: "block", backgroundColor: '#3F4E55', color: 'white', fontSize: '18px' }}>
                         {currentIntroduction ? currentIntroduction.description : ''}
                     </div>
@@ -123,23 +124,23 @@ function Task({ sections, updateQuestionState }) {
                     <div style={{ display: "block", fontSize: '18px', marginTop: '10px' }}>
                         {currentIntroduction && currentIntroduction.title_of_description && previousIntroduction && previousIntroduction.questions ? (
                             previousIntroduction.questions.map((question, index) => (
-<div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', color: question.checked ? 'yellow' : 'white', cursor: 'pointer' }}>
-    <img src={question.correct === 'Poprawne' ? '/img/Odpowiedź_przycisk_żółty-1.png' : '/img/Odpowiedź_przycisk_szary-1.png'} style={{ display: 'inline-block' }} />
-    <span style={{ display: 'flex', alignItems: 'center', marginLeft: '-30px', marginRight: '8px', padding: '5px', backgroundSize: 'cover', borderTopRightRadius: '5px', borderBottomRightRadius: '5px' }}>
-        <b><span style={{ paddingRight: '20px' }}>{index + 1}</span></b>
-        {question.question}
-    </span>
-</div>
+                                <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', color: question.checked ? 'yellow' : 'white', cursor: 'pointer' }}>
+                                    <img src={question.correct === 'Poprawne' ? '/img/Odpowiedź_przycisk_żółty-1.png' : '/img/Odpowiedź_przycisk_szary-1.png'} style={{ display: 'inline-block' }} />
+                                    <span style={{ display: 'flex', alignItems: 'center', marginLeft: '-30px', marginRight: '8px', padding: '5px', backgroundSize: 'cover', borderTopRightRadius: '5px', borderBottomRightRadius: '5px' }}>
+                                        <b><span style={{ paddingRight: '20px' }}>{index + 1}</span></b>
+                                        {question.question}
+                                    </span>
+                                </div>
                             ))
                         ) : (
                             currentIntroduction && currentIntroduction.questions && currentIntroduction.questions.map((question, index) => (
-                            <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', color: question.checked ? 'yellow' : 'white', cursor: 'pointer' }} onClick={() => handleClick(index)}>
-                            <img src="/img/Odpowiedź_przycisk_szary-1.png" style={{ display: 'inline-block' }}/>
-                            <span style={{ display: 'flex', alignItems: 'center', marginLeft:'-30px',marginRight: '8px', padding: '5px', backgroundSize: 'cover', borderTopRightRadius: '5px', borderBottomRightRadius: '5px' }}>
-                                <b><span style={{ paddingRight: '20px' }}>{index + 1}</span></b>
-                                {question.question}
-                            </span>
-                            </div>
+                                <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', color: question.checked ? 'yellow' : 'white', cursor: 'pointer' }} onClick={() => handleClick(index)}>
+                                    <img src="/img/Odpowiedź_przycisk_szary-1.png" style={{ display: 'inline-block' }} />
+                                    <span style={{ display: 'flex', alignItems: 'center', marginLeft: '-30px', marginRight: '8px', padding: '5px', backgroundSize: 'cover', borderTopRightRadius: '5px', borderBottomRightRadius: '5px' }}>
+                                        <b><span style={{ paddingRight: '20px' }}>{index + 1}</span></b>
+                                        {question.question}
+                                    </span>
+                                </div>
                             ))
                         )}
                     </div>

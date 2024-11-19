@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 import MainPage from './components/MainPage';
 import Lessons from './components/Lessons';
@@ -15,7 +15,10 @@ function App() {
 
   useEffect(() => {
     if (sections.length === 0) {
-      fetch('http://localhost:3001/api/sections')
+      // Fetch sections from the API
+      //https://interaktywneseminaria.pl/api/sections
+      //http://localhost:3001/api/sections
+      fetch('https://interaktywneseminaria.pl/api/sections')
         .then(response => response.json())
         .then(data => setSections(data))
         .catch(error => console.error('Error fetching sections:', error));
@@ -39,6 +42,24 @@ function App() {
     setSections(updatedSections);
   };
 
+  const resetLessonState = (sectionId, lessonId) => {
+    const sectionIndex = parseInt(sectionId, 10) - 1;
+    const lessonIndex = parseInt(lessonId, 10) - 1;
+
+    const updatedSections = [...sections];
+    const lesson = updatedSections[sectionIndex].lessons[lessonIndex];
+
+    lesson.tasks.forEach(task => {
+      task.introductions.forEach(introduction => {
+        introduction.questions.forEach(question => {
+          question.checked = false;
+        });
+      });
+    });
+
+    setSections(updatedSections);
+  };
+
   return (
     <Router>
       <div className="App">
@@ -48,8 +69,8 @@ function App() {
           <Route path="/sections/:sectionId/lessons" element={<Lessons sections={sections} />} />
           <Route path="/sections/:sectionId/lessons/:lessonId/" element={<Task sections={sections} updateQuestionState={updateQuestionState} />} />
           <Route path="/sections/:sectionId/lessons/:lessonId/tasks/:taskId/introductions/:introductionsId" element={<Task sections={sections} updateQuestionState={updateQuestionState} />} />
-          <Route path="/sections/:sectionId/summary" element={<Summary sections={sections} />} />
-          <Route path="*" element={<h1>Not Found</h1>} />
+          <Route path="/sections/:sectionId/summary" element={<Summary sections={sections} resetLessonState={resetLessonState} />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
     </Router>

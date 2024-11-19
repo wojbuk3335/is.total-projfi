@@ -22,7 +22,7 @@ function Lessons({ sections }) {
     };
 
     return (
-        <div className="container">
+        <div className="container_first_page">
             <div className="left">
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
                     <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>

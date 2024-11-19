@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './Summary.css'; // Import the CSS file
 
-function Summary({ sections }) {
+function Summary({ sections, resetLessonState }) {
     const { sectionId } = useParams();
     const navigate = useNavigate();
     const sectionIndex = parseInt(sectionId, 10) - 1;
@@ -23,6 +23,11 @@ function Summary({ sections }) {
         navigate('/'); // Replace with the actual path
     };
 
+    const handleResetClick = (lessonId) => {
+        resetLessonState(sectionId, lessonId);
+        navigate('/');
+    };
+
     // Calculate the maximum number of questions across all lessons
     const getMaxQuestions = () => {
         return Math.max(...section.lessons.map(lesson => 
@@ -40,48 +45,49 @@ function Summary({ sections }) {
                 <div className="centered-list">
                     <div className="lessons-grid">
                         {section.lessons.map((lesson, lessonIndex) => (
-                            <div key={lessonIndex} className="lesson">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th ref={el => firstColumnRefs.current[lessonIndex] = el} style={{ width: maxWidth }}>{lesson.title_of_lesson}</th>
-                                            {Array.from({ length: maxQuestions }, (_, questionIndex) => (
-                                                <th key={questionIndex}>{questionIndex + 1}</th>
-                                            ))}
-                                            <th></th> {/* New column for the button */}
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {lesson.tasks.map((task, taskIndex) => (
-                                            <tr key={taskIndex}>
-                                                <td>{String.fromCharCode(65 + taskIndex)}</td>
-                                                {task.introductions[0].questions.map((question, questionIndex) => (
-                                                    <td key={questionIndex}>
-                                                        {question.checked ? (
-                                                            question.correct === "Poprawne" ? (
-                                                                <img src={`/img/odpowiedź_poprawna.png`} alt="Poprawne" />
-                                                            ) : question.correct === "Niepoprawne" ? (
-                                                                <img src={`/img/odpowiedź_niepoprawna.png`} alt="Niepoprawne" />
+                            <div key={lessonIndex} className="lesson-container">
+                                <div className="lesson">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th ref={el => firstColumnRefs.current[lessonIndex] = el} style={{ width: maxWidth }}>{lesson.title_of_lesson}</th>
+                                                {Array.from({ length: maxQuestions }, (_, questionIndex) => (
+                                                    <th key={questionIndex}>{questionIndex + 1}</th>
+                                                ))}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {lesson.tasks.map((task, taskIndex) => (
+                                                <tr key={taskIndex}>
+                                                    <td>{String.fromCharCode(65 + taskIndex)}</td>
+                                                    {task.introductions[0].questions.map((question, questionIndex) => (
+                                                        <td key={questionIndex}>
+                                                            {question.checked ? (
+                                                                question.correct === "Poprawne" ? (
+                                                                    <img src={`/img/odpowiedź_poprawna.png`} alt="Poprawne" />
+                                                                ) : question.correct === "Niepoprawne" ? (
+                                                                    <img src={`/img/odpowiedź_niepoprawna.png`} alt="Niepoprawne" />
+                                                                ) : (
+                                                                    <img src={`/img/brak_odpowiedzi.png`} alt="Brak odpowiedzi" />
+                                                                )
                                                             ) : (
                                                                 <img src={`/img/brak_odpowiedzi.png`} alt="Brak odpowiedzi" />
-                                                            )
-                                                        ) : (
-                                                            <img src={`/img/brak_odpowiedzi.png`} alt="Brak odpowiedzi" />
-                                                        )}
-                                                    </td>
-                                                ))}
-                                                {Array.from({ length: maxQuestions - task.introductions[0].questions.length }).map((_, index) => (
-                                                    <td key={index}>
-                                                        <div><img src={`/img/nothing.png`} alt="Brak odpowiedzi" /></div> {/* Placeholder */}
-                                                    </td>
-                                                ))}
-                                                <td>
-                                                    <button onClick={() => alert('Button clicked!')}>Resetuj</button> {/* New button */}
-                                                </td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
+                                                            )}
+                                                        </td>
+                                                    ))}
+                                                    {Array.from({ length: maxQuestions - task.introductions[0].questions.length }).map((_, index) => (
+                                                        <td key={index}>
+                                                            <div><img src={`/img/nothing.png`} alt="Brak odpowiedzi" /></div> {/* Placeholder */}
+                                                        </td>
+                                                    ))}
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div className="button-container">
+                                    <button className="xxxx" onClick={() => handleResetClick(lessonIndex + 1)}>Resetuj</button>
+                                </div>
                             </div>
                         ))}
                     </div>

@@ -2,6 +2,9 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './mainpage.css';
 import { Link } from 'react-router-dom';
+//import bootstrap from 'bootstrap';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function MainPage({ sections }) {
     const navigate = useNavigate();
@@ -11,7 +14,7 @@ function MainPage({ sections }) {
     };
 
     return (
-        <div className="container">
+        <div className="container_first_page">
             <div className="left">
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
                     <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
