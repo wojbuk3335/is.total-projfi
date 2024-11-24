@@ -111,11 +111,11 @@ router.post('/admin/resetPassword/:token', UserController.resetPassword);
 
 router.get('/video', isAuthMiddleware, pageController.ShowFilm);
 router.get('/admin/add', isAuthMiddleware, pageController.showAdd);
-router.post('/admin/add', isAuthMiddleware, upload.any(), pageController.AddData);
+router.post('/admin/add', upload.any(), pageController.AddData);
 router.get('/admin/edit', isAuthMiddleware, pageController.ShowEdit);
 router.get('/admin/edit/section/:id', isAuthMiddleware, pageController.EditSection);
 router.get('/admin/delete/:id', isAuthMiddleware, pageController.DeleteData);
-router.post('/admin/edit/section/:id', isAuthMiddleware, upload.any(), pageController.UpdateSection);
+router.post('/admin/edit/section/:id', upload.any(), pageController.UpdateSection);
 
 // Catch-all route for /admin/* to render the "Not Found" page
 router.get('/admin/*', pageController.showNotFound);

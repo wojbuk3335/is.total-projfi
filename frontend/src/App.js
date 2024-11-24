@@ -8,26 +8,19 @@ import Summary from './components/Summary';
 import HowToUse from './components/HowToUse';
 
 function App() {
-  const [sections, setSections] = useState(() => {
-    const savedSections = localStorage.getItem('sections');
-    return savedSections ? JSON.parse(savedSections) : [];
-  });
+  const [sections, setSections] = useState([]);
 
   useEffect(() => {
     if (sections.length === 0) {
       // Fetch sections from the API
       //https://interaktywneseminaria.pl/api/sections
       //http://localhost:3001/api/sections
-      fetch('https://interaktywneseminaria.pl/api/sections')
+      fetch('http://localhost:3001/api/sections')
         .then(response => response.json())
         .then(data => setSections(data))
         .catch(error => console.error('Error fetching sections:', error));
     }
   }, []);
-
-  useEffect(() => {
-    localStorage.setItem('sections', JSON.stringify(sections));
-  }, [sections]);
 
   const updateQuestionState = (sectionId, lessonId, taskId, introductionsId, questionIndex) => {
     const sectionIndex = parseInt(sectionId, 10) - 1;
