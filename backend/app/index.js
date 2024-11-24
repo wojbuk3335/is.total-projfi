@@ -41,7 +41,6 @@ app.use(cookieParser());
 // // middleware
 app.use('/', require('../middleware/view-variables-middleware'));
 app.use('/', require('../middleware/user-middleware'));
-app.use('/admin', require('../middleware/is-auth-middleware'));
 
 app.use('/app', express.static(path.join(__dirname, '../public')));
 

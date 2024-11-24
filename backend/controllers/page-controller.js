@@ -196,12 +196,11 @@ class basicController {
     }
   }
 
-  showNotFound(req, res, next) {
-    try {
-        res.redirect('/');
-    } catch (err) {
-        next(err);
-    }
+  showNotFound(req, res) {
+    res.status(404).render('pages/notFound', {
+      title: 'Page Not Found',
+              layout: 'layouts/404'
+    });
   }
 }
 

@@ -148,7 +148,7 @@ class UserController {
     // Check if the user is already logged in
     if (req.session.user) {
       // User is logged in, redirect to /admin
-      return res.redirect('/admin');
+      return res.redirect('/admin/login');
     }
     // User is not logged in, render the login page
     res.render('pages/auth/login', { 
@@ -161,29 +161,36 @@ class UserController {
     try {
       const user = await User.findOne({ email: req.body.email });
       if (!user) {
-        throw new Error('user not found');
-      } 
-
+        throw new Error('User not found');
+      }
+  
       const isValidPassword = await user.comparePassword(req.body.password);
       if (!isValidPassword) {
-        throw new Error('password not valid');
+        throw new Error('Password not valid');
       }
+  
       console.log('User logged in');
-      // login
+      // Set the user session
       req.session.user = user;
-      res.redirect('/admin/add');
-    } catch (e) {
+  
+      // Redirect to the home page
+      res.redirect('/admin/home');
+    } catch (error) {
+      console.error(error);
       res.render('pages/auth/login', {
-        form: req.body,
-        errors: e.message
+        title: 'Login',
+        layout: 'layouts/login',
+        error: error.message
       });
     }
   }
 
   logout(req, res) {
     req.session.destroy();
-    res.redirect('/login');
+    res.redirect('/admin/login');
+    console.log('User logged out');
   }
+
 
   showProfile(req, res) {
     res.render('pages/auth/profile', {
